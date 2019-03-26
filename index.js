@@ -107,7 +107,7 @@ class MP {
    * @memberof MP
    */
   addProducts(products) {
-    return this.$post('/catalog/add', {
+    return this.$post('/catalog/products', {
       body: JSON.stringify({ products })
     });
   }
