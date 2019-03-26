@@ -67,6 +67,7 @@ class MP {
    *
    * @param {object} { limit = 10, page = 1, lastUpdate = null, keyword = null, hideOutOfStock = 0 }
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_get_products
    * @memberof MP
    */
   getProducts({ limit = 10, page = 1, lastUpdate = null, keyword = null, hideOutOfStock = 0 }) {
@@ -92,6 +93,7 @@ class MP {
    * Get total number of imported products
    *
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_products_count
    * @memberof MP
    */
   getProductsCount() {
@@ -154,6 +156,7 @@ class MP {
    * @param {number} [limit=25]
    * @param {number} [page=1]
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_get_order_s_
    * @memberof MP
    */
   getOrders(limit = 25, page = 1) {
@@ -166,6 +169,7 @@ class MP {
    *
    * @param {string} id
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_order_by_id
    * @memberof MP
    */
   getOrderById(id) {
@@ -177,6 +181,7 @@ class MP {
    *
    * @param {array} data
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_create_order
    * @memberof MP
    */
   createOrder(data) {
@@ -189,6 +194,7 @@ class MP {
    * @param {string} orderId
    * @param {array} data
    * @returns
+   * @see https://knawat-mp.restlet.io/#operation_update_order
    * @memberof MP
    */
   updateOrder(orderId, data) {
