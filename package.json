@@ -2,9 +2,12 @@
   "name": "@knawat/mp",
   "version": "0.0.1",
   "description": "A Node.js package for the Knawat Dropshipping MP REST API",
-  "main": "index.js",
+  "module": "dist/mp.esm.js",
+  "unpkg": "dist/mp.js",
+  "main": "dist/mp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "NODE_ENV=production node scripts/build",
+    "dev": "node scripts/watcher"
   },
   "repository": {
     "type": "git",
@@ -22,12 +25,25 @@
   },
   "homepage": "https://github.com/Knawat/Knawat-NPM-JavaScript-SDK#readme",
   "dependencies": {
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "querystring": "^0.2.0",
+    "rollup-plugin-node-builtins": "^2.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
-    "prettier": "^1.16.4"
+    "filesize": "^4.1.2",
+    "gzip-size": "^5.0.0",
+    "path": "^0.12.7",
+    "prettier": "^1.16.4",
+    "rollup": "^1.7.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.2",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-resolve": "0.0.1-predev.1",
+    "uglify-js": "^3.5.2"
   }
 }

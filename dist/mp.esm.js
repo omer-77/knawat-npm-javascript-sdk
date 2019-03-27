@@ -1,11 +1,17 @@
-const fetch = require('node-fetch');
-const querystring = require('querystring');
+/**
+  * Knawat MP 0.0.1
+  * (c) 2019
+    * @license MIT
+    */
+import fetch from 'node-fetch';
+import querystring from 'querystring';
 
 /**
  * A Class Library for handling Knawat MarketPlace related Operations.
  *
  * @class MP
  */
+
 class MP {
   /**
    * Creates an instance of MP.
@@ -13,7 +19,11 @@ class MP {
    * @param {object} activeInstance
    * @memberof MP
    */
-  constructor({ consumerKey, consumerSecret, token }) {
+  constructor({
+    consumerKey,
+    consumerSecret,
+    token
+  }) {
     this.baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
@@ -25,13 +35,14 @@ class MP {
       }
     };
   }
-
   /**
    * Generate access token from store key and secret
    *
    * @readonly
    * @memberof MP
    */
+
+
   get token() {
     if (!this.myToken) {
       return this.refreshToken();
@@ -39,20 +50,23 @@ class MP {
 
     return this.myToken;
   }
-
   /**
    * Generates a new access token
    *
    * @returns
    * @memberof MP
    */
+
+
   refreshToken() {
     return this.$post('/token', {
       body: JSON.stringify({
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret
       })
-    }).then(({ channel }) => {
+    }).then(({
+      channel
+    }) => {
       if (!channel) {
         throw new Error(401);
       }
@@ -61,7 +75,6 @@ class MP {
       return channel.token;
     });
   }
-
   /**
    * Get all imported products
    *
@@ -70,13 +83,25 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_get_products
    * @memberof MP
    */
-  getProducts({ limit = 10, page = 1, lastUpdate = null, keyword = null, hideOutOfStock = 0 }) {
-    // Generate url query paramaters
-    const params = querystring.stringify({ limit, page, lastUpdate, keyword, hideOutOfStock });
 
+
+  getProducts({
+    limit = 10,
+    page = 1,
+    lastUpdate = null,
+    keyword = null,
+    hideOutOfStock = 0
+  }) {
+    // Generate url query paramaters
+    const params = querystring.stringify({
+      limit,
+      page,
+      lastUpdate,
+      keyword,
+      hideOutOfStock
+    });
     return this.$get(`/catalog/products?${params}`);
   }
-
   /**
    * Get product by sku
    *
@@ -85,10 +110,11 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_get_product_by_sku
    * @memberof MP
    */
+
+
   getProductBySku(sku) {
     return this.$get(`/catalog/products/${sku}`);
   }
-
   /**
    * Get total number of imported products
    *
@@ -96,10 +122,13 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_products_count
    * @memberof MP
    */
-  getProductsCount() {
-    return this.$get(`catalog/products/count`).then(({ total }) => total);
-  }
 
+
+  getProductsCount() {
+    return this.$get(`catalog/products/count`).then(({
+      total
+    }) => total);
+  }
   /**
    * Add product(s) to my list
    *
@@ -108,12 +137,15 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_add_to_my_products
    * @memberof MP
    */
+
+
   addProducts(products) {
     return this.$post('/catalog/products', {
-      body: JSON.stringify({ products })
+      body: JSON.stringify({
+        products
+      })
     });
   }
-
   /**
    * Update product external IDs by SKU
    *
@@ -122,12 +154,15 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_update_product
    * @memberof MP
    */
+
+
   updateProductBySku(data) {
     return this.$put(`/catalog/update/${sku}`, {
-      body: JSON.stringify({ data })
+      body: JSON.stringify({
+        data
+      })
     });
   }
-
   /**
    * Remove product from my list
    *
@@ -135,10 +170,11 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_delete_product_by_sku
    * @memberof MP
    */
+
+
   deleteProductBySku(data) {
     return this.$delete(`/catalog/products/${sku}`);
   }
-
   /**
    * Get all catalog categories
    *
@@ -146,10 +182,11 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_get_list_of_categories
    * @memberof MP
    */
+
+
   getCategories() {
     return this.$get('/catalog/categories');
   }
-
   /**
    *  Get all current orders
    *
@@ -159,11 +196,15 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_get_order_s_
    * @memberof MP
    */
+
+
   getOrders(limit = 25, page = 1) {
-    const params = querystring.stringify({ limit, page });
+    const params = querystring.stringify({
+      limit,
+      page
+    });
     return this.$get(`/orders?${params}`);
   }
-
   /**
    * Get order by sku
    *
@@ -172,10 +213,11 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_order_by_id
    * @memberof MP
    */
+
+
   getOrderById(id) {
     return this.$get(`/orders/${id}`);
   }
-
   /**
    * Create new order
    *
@@ -184,10 +226,13 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_create_order
    * @memberof MP
    */
-  createOrder(data) {
-    return this.$post(`/order`, { data });
-  }
 
+
+  createOrder(data) {
+    return this.$post(`/order`, {
+      data
+    });
+  }
   /**
    * Update current order
    *
@@ -197,12 +242,13 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_update_order
    * @memberof MP
    */
+
+
   updateOrder(orderId, data) {
     return this.$put(`/order${orderId}`, {
       body: data
     });
   }
-
   /**
    *
    *
@@ -211,18 +257,17 @@ class MP {
    * @returns
    * @memberof MP
    */
+
+
   $post(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
       method: 'post',
       ...this.options,
       ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
+    }).then(res => res.json()).catch(error => {
+      throw error;
+    });
   }
-
   /**
    *
    * @param {string} path
@@ -230,17 +275,15 @@ class MP {
    * @returns
    * @memberof MP
    */
+
+
   $get(path, options = {}) {
-    return fetch(`${MP.baseUrl}${path}`, {
-      ...this.options,
+    return fetch(`${MP.baseUrl}${path}`, { ...this.options,
       ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
+    }).then(res => res.json()).catch(error => {
+      throw error;
+    });
   }
-
   /**
    *
    * @param {string} path
@@ -248,18 +291,17 @@ class MP {
    * @returns
    * @memberof MP
    */
+
+
   $put(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
       method: 'put',
       ...this.options,
       ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
+    }).then(res => res.json()).catch(error => {
+      throw error;
+    });
   }
-
   /**
    *
    * @param {string} path
@@ -267,17 +309,18 @@ class MP {
    * @returns
    * @memberof MP
    */
+
+
   $delete(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
       method: 'delete',
       ...this.options,
       ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
+    }).then(res => res.json()).catch(error => {
+      throw error;
+    });
   }
+
 }
 
-module.exports = MP;
+export default MP;
