@@ -9,7 +9,7 @@ A Node.js package for Knawat Dropshipping MP REST API. Easily interact with the 
 ## Installation
 
 ```
-npm install --save knawat/mp
+npm install --save @knawat/mp
 ```
 
 ## Getting started
