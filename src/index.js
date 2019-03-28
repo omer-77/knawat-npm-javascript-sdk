@@ -280,4 +280,4 @@ class MP {
   }
 }
 
-export default MP;
+module.exports = MP;
