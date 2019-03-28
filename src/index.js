@@ -17,11 +17,11 @@ class MP {
   constructor({ consumerKey, consumerSecret, token }) {
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
-    this.myToken = token;
+    this.token = token;
+
     this.options = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.myToken}`
+        'Content-Type': 'application/json'
       }
     };
   }
@@ -34,10 +34,20 @@ class MP {
    */
   get token() {
     if (!this.myToken) {
+      //this.myToken = token;
+
       return this.refreshToken();
     }
 
     return this.myToken;
+  }
+
+  set token(val) {
+    if (!val) {
+      return;
+    }
+    this.myToken = val;
+    this.options.headers.Authorization = `Bearer ${val}`;
   }
 
   /**
@@ -52,14 +62,18 @@ class MP {
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret
       })
-    }).then(({ channel }) => {
-      if (!channel) {
-        throw new Error(401);
-      }
+    })
+      .then(({ channel }) => {
+        if (!channel) {
+          throw new Error(401);
+        }
 
-      this.myToken = channel.token;
-      return channel.token;
-    });
+        return channel;
+      })
+      .then(({ token }) => {
+        this.token = token;
+        return token;
+      });
   }
 
   /**

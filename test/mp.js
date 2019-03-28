@@ -5,7 +5,8 @@ const instance = {
   consumerSecret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
 };
 
-test('test 1', async () => {
-  const mp = await new MP(instance);
-  expect(typeof mp.token).toBe('string');
+test('test refresh token', async () => {
+  const mp = new MP(instance);
+  const data = await mp.refreshToken();
+  expect(typeof data).toBe('string');
 });
