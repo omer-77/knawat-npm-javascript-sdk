@@ -7,6 +7,7 @@ import querystring from 'querystring';
  * @class MP
  */
 class MP {
+  static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
   /**
    * Creates an instance of MP.
    *
@@ -14,7 +15,6 @@ class MP {
    * @memberof MP
    */
   constructor({ consumerKey, consumerSecret, token }) {
-    this.baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
     this.myToken = token;
