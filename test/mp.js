@@ -23,4 +23,11 @@ test('Get Products', async () => {
   expect(typeof res.total).toBe('number');
 });
 
+test('Get Product By Sku', async () => {
+  const res = await mp.getProductBySku('J9810A619SPBE394');
+  expect(typeof res.product).toBe('object');
+  expect(typeof res.product.sku).toBe('string');
+  expect(typeof res.product.supplier).toBe('number');
+});
+
 });
