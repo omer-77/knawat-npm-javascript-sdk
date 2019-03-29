@@ -81,4 +81,11 @@ test('Get orders', async () => {
   expect(['pending', 'processing', 'cancelled'].includes(res[0].status)).toBe(true);
 });
 
+test('Get Order By Id', async () => {
+  const res = await mp.getOrderById('1');
+  expect(typeof res).toBe('object');
+  expect(typeof res.id).toBe('string');
+  expect(res.status).toBe('processing');
+});
+
 });
