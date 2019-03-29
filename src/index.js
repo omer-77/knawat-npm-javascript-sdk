@@ -194,7 +194,7 @@ class MP {
    * @memberof MP
    */
   createOrder(data) {
-    return this.$post(`/order`, { data });
+    return this.$post(`/orders`, { body: data });
   }
 
   /**
