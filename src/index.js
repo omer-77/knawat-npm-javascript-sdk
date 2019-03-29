@@ -144,7 +144,7 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_delete_product_by_sku
    * @memberof MP
    */
-  deleteProductBySku(data) {
+  deleteProductBySku(sku) {
     return this.$delete(`/catalog/products/${sku}`);
   }
 
