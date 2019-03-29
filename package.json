@@ -7,9 +7,9 @@
   "main": "dist/mp.js",
   "scripts": {
     "build": "NODE_ENV=production node scripts/build",
-    "dev": "node scripts/watcher",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "dev": "MP_BASEURL=https://dev.mp.knawat.io/api node scripts/watcher",
+    "test": "MP_BASEURL=https://dev.mp.knawat.io/api jest",
+    "test:coverage": "MP_BASEURL=https://dev.mp.knawat.io/api jest --coverage",
     "test:watch": "MP_BASEURL=https://dev.mp.knawat.io/api jest --watch"
   },
   "repository": {
