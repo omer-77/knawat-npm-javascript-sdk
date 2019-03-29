@@ -30,4 +30,9 @@ test('Get Product By Sku', async () => {
   expect(typeof res.product.supplier).toBe('number');
 });
 
+test('Total imported products', async () => {
+  const res = await mp.getProductsCount();
+  expect(typeof res.total).toBe('number');
+});
+
 });
