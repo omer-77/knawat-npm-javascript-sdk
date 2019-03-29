@@ -106,7 +106,7 @@ class MP {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$get(`catalog/products/count`).then(({ total }) => total);
+    return this.$get(`catalog/products/count`);
   }
 
   /**
