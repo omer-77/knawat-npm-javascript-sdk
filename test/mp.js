@@ -67,4 +67,11 @@ test('Delete product', async () => {
   expect(res.product.status).toBe('success');
 });
 
+test('Categories list', async () => {
+  const res = await mp.getCategories();
+  expect(typeof res).toBe('object');
+  expect(res.length > 0).toBe(true);
+  expect(typeof res[0].id).toBe('number');
+});
+
 });
