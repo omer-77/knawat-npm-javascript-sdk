@@ -5,10 +5,11 @@ const instance = {
   consumerSecret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
 };
 
+const mp = new MP(instance);
 test('test refresh token', async () => {
-  const mp = new MP(instance);
-beforeAll(async () => {
-  await mp.refreshToken();
+  beforeAll(async () => {
+    await mp.refreshToken();
+  });
 });
 test('Refresh token', async () => {
   const data = await mp.refreshToken();
@@ -86,6 +87,4 @@ test('Get Order By Id', async () => {
   expect(typeof res).toBe('object');
   expect(typeof res.id).toBe('string');
   expect(res.status).toBe('processing');
-});
-
 });
