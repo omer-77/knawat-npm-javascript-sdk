@@ -35,4 +35,10 @@ test('Total imported products', async () => {
   expect(typeof res.total).toBe('number');
 });
 
+test('Import products', async () => {
+  const res = await mp.addProducts([{ sku: 'K4485AZ19SPRD45' }]);
+  expect(typeof res).toBe('object');
+  expect(typeof res.success[0]).toBe('string');
+});
+
 });
