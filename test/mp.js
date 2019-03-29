@@ -59,4 +59,12 @@ test('Update product instance', async () => {
   expect(res).toBe('Updated Successfully!');
 });
 
+test('Delete product', async () => {
+  const res = await mp
+    .addProducts([{ sku: 'K5928AZ19SPND1' }])
+    .then(() => mp.deleteProductBySku('K5928AZ19SPND1'));
+  expect(typeof res).toBe('object');
+  expect(res.product.status).toBe('success');
+});
+
 });
