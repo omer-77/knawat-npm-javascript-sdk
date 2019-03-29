@@ -131,7 +131,7 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_update_product
    * @memberof MP
    */
-  updateProductBySku(data) {
+  updateProductBySku(sku, data) {
     return this.$put(`/catalog/update/${sku}`, {
       body: JSON.stringify({ data })
     });
