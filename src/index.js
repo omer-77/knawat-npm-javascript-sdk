@@ -62,13 +62,13 @@ class MP {
         consumerSecret: this.consumerSecret
       })
     }).then(({ channel }) => {
-        if (!channel) {
-          throw new Error(401);
-        }
+      if (!channel) {
+        throw new Error(401);
+      }
 
       this.token = channel.token;
       return channel.token;
-      });
+    });
   }
 
   /**
@@ -207,7 +207,7 @@ class MP {
    * @memberof MP
    */
   updateOrder(orderId, data) {
-    return this.$put(`/order${orderId}`, {
+    return this.$put(`/orders/${orderId}`, {
       body: data
     });
   }
