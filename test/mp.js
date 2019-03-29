@@ -74,4 +74,11 @@ test('Categories list', async () => {
   expect(typeof res[0].id).toBe('number');
 });
 
+test('Get orders', async () => {
+  const res = await mp.getOrders();
+  expect(typeof res).toBe('object');
+  expect(typeof res[0].id).toBe('string');
+  expect(['pending', 'processing', 'cancelled'].includes(res[0].status)).toBe(true);
+});
+
 });
