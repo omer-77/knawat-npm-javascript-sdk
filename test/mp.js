@@ -1,4 +1,4 @@
-const MP = require('../dist/mp.js');
+const MP = require('../src/index.js');
 
 const instance = {
   consumerKey: 'ffdc11c6-b31c-4f81-8f67-468cf776e096',
