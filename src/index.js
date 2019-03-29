@@ -17,13 +17,12 @@ class MP {
   constructor({ consumerKey, consumerSecret, token }) {
     this.consumerKey = consumerKey;
     this.consumerSecret = consumerSecret;
-    this.token = token;
-
     this.options = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
+    this.token = token;
   }
 
   /**
