@@ -62,17 +62,13 @@ class MP {
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret
       })
-    })
-      .then(({ channel }) => {
+    }).then(({ channel }) => {
         if (!channel) {
           throw new Error(401);
         }
 
-        return channel;
-      })
-      .then(({ token }) => {
-        this.token = token;
-        return token;
+      this.token = channel.token;
+      return channel.token;
       });
   }
 
