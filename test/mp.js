@@ -7,6 +7,13 @@ const instance = {
 
 test('test refresh token', async () => {
   const mp = new MP(instance);
+beforeAll(async () => {
+  await mp.refreshToken();
+});
+test('Refresh token', async () => {
   const data = await mp.refreshToken();
   expect(typeof data).toBe('string');
+  expect(mp.options.headers.Authorization.search('undefined')).toBe(-1);
+});
+
 });
