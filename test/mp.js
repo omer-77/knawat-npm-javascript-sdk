@@ -41,4 +41,22 @@ test('Import products', async () => {
   expect(typeof res.success[0]).toBe('string');
 });
 
+test('Update product instance', async () => {
+  const res = await mp.updateProductBySku('M3DMGSO22049-PNK', {
+    externalUrl: 'https://devtestknawat.myshopify.com/products/oversize-slit-shoulders-tunic-1',
+    externalId: 3081359687744,
+    variations: [
+      {
+        externalId: 26034301468736,
+        sku: 'M3DMGSO22049-PNK'
+      },
+      {
+        externalId: 26034301501504,
+        sku: 'M3DMGSO22049-PNK'
+      }
+    ]
+  });
+  expect(res).toBe('Updated Successfully!');
+});
+
 });
