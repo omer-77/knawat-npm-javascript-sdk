@@ -16,4 +16,11 @@ test('Refresh token', async () => {
   expect(mp.options.headers.Authorization.search('undefined')).toBe(-1);
 });
 
+test('Get Products', async () => {
+  const res = await mp.getProducts(10, 1, null, null, 0);
+  expect(typeof res).toBe('object');
+  expect(typeof res.products).toBe('object');
+  expect(typeof res.total).toBe('number');
+});
+
 });
