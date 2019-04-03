@@ -1,16 +1,17 @@
 const MP = require('../src/index.js');
 
+MP.baseUrl = 'https://dev.mp.knawat.io/api';
 const instance = {
   consumerKey: 'ffdc11c6-b31c-4f81-8f67-468cf776e096',
   consumerSecret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
 };
-
 const mp = new MP(instance);
-test('test refresh token', async () => {
-  beforeAll(async () => {
-    await mp.refreshToken();
-  });
+
+test('test invalid instance', async () => {
+  const invalid = () => new MP();
+  expect(invalid).toThrow(Error);
 });
+
 test('Refresh token', async () => {
   const data = await mp.refreshToken();
   expect(typeof data).toBe('string');
@@ -22,6 +23,7 @@ test('Get Products', async () => {
   expect(typeof res).toBe('object');
   expect(typeof res.products).toBe('object');
   expect(typeof res.total).toBe('number');
+  expect(res.products.length).toEqual(10);
 });
 
 test('Get Product By Sku', async () => {
@@ -65,13 +67,14 @@ test('Delete product', async () => {
     .addProducts([{ sku: 'K5928AZ19SPND1' }])
     .then(() => mp.deleteProductBySku('K5928AZ19SPND1'));
   expect(typeof res).toBe('object');
+  expect(typeof res.product).toBe('object');
   expect(res.product.status).toBe('success');
 });
 
 test('Categories list', async () => {
   const res = await mp.getCategories();
   expect(typeof res).toBe('object');
-  expect(res.length > 0).toBe(true);
+  expect(res.length).toBeGreaterThan(0);
   expect(typeof res[0].id).toBe('number');
 });
 
