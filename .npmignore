@@ -4,3 +4,8 @@ src
 .eslintrc.json
 .gitignore
 .prettierrc.json
+.vscode
+jest.*
+coverage
+script
+test
