@@ -8,8 +8,8 @@ const version = process.env.VERSION || require('../package.json').version;
 const paths = {
   src: path.join(__dirname, '../src'),
   dist: path.join(__dirname, '../dist'),
-  outputFolder: path.join(__dirname, '../dist'),
-}
+  outputFolder: path.join(__dirname, '../dist')
+};
 
 const common = {
   name: 'mp',
@@ -19,19 +19,13 @@ const common = {
     compress: true,
     mangle: true
   },
-  banner:
-    `/**
+  banner: `/**
   * Knawat MP ${version}
   * (c) ${new Date().getFullYear()}
     * @license MIT
     */`,
-  plugins: [
-    babel(),
-    commonjs(),
-    nodeResolve(),
-    builtins()
-  ]
-}
+  plugins: [babel(), commonjs(), nodeResolve(), builtins()]
+};
 const builds = {
   umd: {
     format: 'umd',
@@ -43,9 +37,9 @@ const builds = {
     format: 'es',
     ext: '.esm'
   }
-}
+};
 
-function getConfig (key) {
+function getConfig(key) {
   const build = builds[key];
   const config = {
     ...build,
@@ -60,18 +54,18 @@ function getConfig (key) {
       format: build.format,
       globals: {
         'node-fetch': 'fetch',
-        'querystring': 'querystring'
+        querystring: 'querystring'
       },
       exports: 'named'
     }
-  }
+  };
   return config;
 }
 
 const configs = Object.keys(builds).reduce((acc, build) => {
   acc[build] = getConfig(build);
   return acc;
-}, {})
+}, {});
 
 module.exports = {
   paths,
