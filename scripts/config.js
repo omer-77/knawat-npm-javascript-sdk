@@ -30,7 +30,6 @@ const builds = {
   umd: {
     format: 'umd',
     name: 'MP',
-    minify: true,
     ext: ''
   },
   esm: {
