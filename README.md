@@ -1,8 +1,18 @@
-<p align="center"><a href="https://knawat.com/"><img src="https://knawat.com/wp-content/uploads/2017/10/253_77.png" alt="Knawat"></a></p>
+<p align="center"><a href="https://knawat.com/" target="_blank"><img src="https://knawat.com/wp-content/uploads/2017/10/253_77.png" alt="Knawat" width="300"></a></p>
 
-[![Join the chat at https://gitter.im/Knawat/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Knawat/Lobby)
+<p align="center">
+  <a href="https://gitter.im/Knawat/Lobby" rel="nofollow">
+    <img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at Knawat">
+  </a>
 
-# Knawat Node.js NPM Package
+<a href="http://isitmaintained.com/project/Knawat/Knawat-NPM-JavaScript-SDK"><img src="http://isitmaintained.com/badge/resolution/Knawat/Knawat-NPM-JavaScript-SDK.svg" alt="Average time to resolve an issue"/></a>
+<a href="http://isitmaintained.com/project/Knawat/Knawat-NPM-JavaScript-SDK"><img src="http://isitmaintained.com/badge/open/Knawat/Knawat-NPM-JavaScript-SDK.svg" alt="Percentage of issues still open"/></a>
+<a href="https://npm-stat.com/charts.html?package=@knawat/mp"><img src="https://img.shields.io/npm/dm/@knawat/mp.svg" alt="npm"/></a>
+<a href="https://www.npmjs.com/package/@knawat/mp"><img src="https://img.shields.io/npm/v/@knawat/mp.svg" alt="npm"/></a>
+
+</p>
+
+# Knawat Node.js NPM Package (MP)
 
 A Node.js package for Knawat Dropshipping MP REST API. Easily interact with the Knawat MP REST API using this library.
 
