@@ -2,9 +2,10 @@ const MP = require('../src/index.js');
 
 MP.baseUrl = 'https://dev.mp.knawat.io/api';
 const instance = {
-  consumerKey: 'ffdc11c6-b31c-4f81-8f67-468cf776e096',
-  consumerSecret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
+  key: 'ffdc11c6-b31c-4f81-8f67-468cf776e096',
+  secret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
 };
+const products = [{ sku: 'EMT8086EM' }, { sku: 'EMT8107EM' }];
 const mp = new MP(instance);
 
 test('test invalid instance', async () => {
@@ -15,7 +16,7 @@ test('test invalid instance', async () => {
 test('Refresh token', async () => {
   const data = await mp.refreshToken();
   expect(typeof data).toBe('string');
-  expect(mp.options.headers.Authorization.search('undefined')).toBe(-1);
+  expect(mp.headers.Authorization.search('undefined')).toBe(-1);
 });
 
 test('Get Products', async () => {
@@ -39,7 +40,7 @@ test('Total imported products', async () => {
 });
 
 test('Import products', async () => {
-  const res = await mp.addProducts([{ sku: 'K4485AZ19SPRD45' }]);
+  const res = await mp.addProducts(products);
   expect(typeof res).toBe('object');
   expect(typeof res.success[0]).toBe('string');
 });

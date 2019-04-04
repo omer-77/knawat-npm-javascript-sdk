@@ -24,19 +24,19 @@ Setup for the new Knawat Dropshipping REST API integration:
 const MP = require('knawat/mp');
 
 const mp = new MP({
-  consumerKey: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  consumerSecret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
+  key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
   token: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 });
 ```
 
 ### Options
 
-| Option           | Type     | Required | Description                      |
-| ---------------- | -------- | -------- | -------------------------------- |
-| `consumerKey`    | `string` | yes      | Your Store's API consumer key    |
-| `consumerSecret` | `string` | yes      | Your Store's API consumer secret |
-| `token`          | `string` | no       | Previous token                   |
+| Option   | Type     | Required | Description                      |
+| -------- | -------- | -------- | -------------------------------- |
+| `key`    | `string` | yes      | Your Store's API consumer key    |
+| `secret` | `string` | yes      | Your Store's API consumer secret |
+| `token`  | `string` | no       | Previous token                   |
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
