@@ -8,24 +8,23 @@ import querystring from 'querystring';
  */
 class MP {
   static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
+  headers = {
+    'Content-Type': 'application/json'
+  };
+
   /**
    * Creates an instance of MP.
    *
    * @param {object} activeInstance
    * @memberof MP
    */
-  constructor({ consumerKey, consumerSecret, token }) {
-    if (!consumerKey || !consumerSecret) {
+  constructor({ key, secret, token }) {
+    if (!key || !secret) {
       throw new Error('not a valid consumerKey or consumerSecret');
     }
 
-    this.consumerKey = consumerKey;
-    this.consumerSecret = consumerSecret;
-    this.options = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    this.consumerKey = key;
+    this.consumerSecret = secret;
     this.token = token;
   }
 
@@ -37,8 +36,6 @@ class MP {
    */
   get token() {
     if (!this.myToken) {
-      //this.myToken = token;
-
       return this.refreshToken();
     }
 
@@ -50,7 +47,7 @@ class MP {
       return;
     }
     this.myToken = val;
-    this.options.headers.Authorization = `Bearer ${val}`;
+    this.headers.Authorization = `Bearer ${val}`;
   }
 
   /**
@@ -66,10 +63,6 @@ class MP {
         consumerSecret: this.consumerSecret
       })
     }).then(({ channel }) => {
-      if (!channel) {
-        throw new Error(401);
-      }
-
       this.token = channel.token;
       return channel.token;
     });
@@ -226,8 +219,8 @@ class MP {
    */
   $post(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
-      method: 'post',
-      ...this.options,
+      method: 'POST',
+      headers: this.headers,
       ...options
     })
       .then(res => res.json())
@@ -245,7 +238,8 @@ class MP {
    */
   $get(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
-      ...this.options,
+      method: 'GET',
+      headers: this.headers,
       ...options
     })
       .then(res => res.json())
@@ -263,8 +257,8 @@ class MP {
    */
   $put(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
-      method: 'put',
-      ...this.options,
+      method: 'PUT',
+      headers: this.headers,
       ...options
     })
       .then(res => res.json())
@@ -282,8 +276,8 @@ class MP {
    */
   $delete(path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
-      method: 'delete',
-      ...this.options,
+      method: 'DELETE',
+      headers: this.headers,
       ...options
     })
       .then(res => res.json())
