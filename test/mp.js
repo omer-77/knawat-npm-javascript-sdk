@@ -1,94 +1,13 @@
-const MP = require('../src/index.js');
+import mp from './setup';
 
-MP.baseUrl = 'https://dev.mp.knawat.io/api';
-const instance = {
-  key: 'ffdc11c6-b31c-4f81-8f67-468cf776e096',
-  secret: 'b86820ca-ac8c-4af8-ba86-340d57036de7'
-};
-const products = [{ sku: 'EMT8086EM' }, { sku: 'EMT8107EM' }];
-const mp = new MP(instance);
-
-test('test invalid instance', async () => {
+test('test invalid instance', () => {
   const invalid = () => new MP();
   expect(invalid).toThrow(Error);
 });
 
-test('Refresh token', async () => {
-  const data = await mp.refreshToken();
-  expect(typeof data).toBe('string');
-  expect(mp.headers.Authorization.search('undefined')).toBe(-1);
-});
-
-test('Get Products', async () => {
-  const res = await mp.getProducts(10, 1, null, null, 0);
-  expect(typeof res).toBe('object');
-  expect(typeof res.products).toBe('object');
-  expect(typeof res.total).toBe('number');
-  expect(res.products.length).toEqual(10);
-});
-
-test('Get Product By Sku', async () => {
-  const res = await mp.getProductBySku('J9810A619SPBE394');
-  expect(typeof res.product).toBe('object');
-  expect(typeof res.product.sku).toBe('string');
-  expect(typeof res.product.supplier).toBe('number');
-});
-
-test('Total imported products', async () => {
-  const res = await mp.getProductsCount();
-  expect(typeof res.total).toBe('number');
-});
-
-test('Import products', async () => {
-  const res = await mp.addProducts(products);
-  expect(typeof res).toBe('object');
-  expect(typeof res.success[0]).toBe('string');
-});
-
-test('Update product instance', async () => {
-  const res = await mp.updateProductBySku('M3DMGSO22049-PNK', {
-    externalUrl: 'https://devtestknawat.myshopify.com/products/oversize-slit-shoulders-tunic-1',
-    externalId: 3081359687744,
-    variations: [
-      {
-        externalId: 26034301468736,
-        sku: 'M3DMGSO22049-PNK'
-      },
-      {
-        externalId: 26034301501504,
-        sku: 'M3DMGSO22049-PNK'
-      }
-    ]
+test('Refresh token', () => {
+  return mp.refreshToken().then(data => {
+    expect(data).toBeDefined();
+    expect(mp.headers.Authorization).toEqual(expect.stringContaining('Bearer'));
   });
-  expect(res).toBe('Updated Successfully!');
-});
-
-test('Delete product', async () => {
-  const res = await mp
-    .addProducts([{ sku: 'K5928AZ19SPND1' }])
-    .then(() => mp.deleteProductBySku('K5928AZ19SPND1'));
-  expect(typeof res).toBe('object');
-  expect(typeof res.product).toBe('object');
-  expect(res.product.status).toBe('success');
-});
-
-test('Categories list', async () => {
-  const res = await mp.getCategories();
-  expect(typeof res).toBe('object');
-  expect(res.length).toBeGreaterThan(0);
-  expect(typeof res[0].id).toBe('number');
-});
-
-test('Get orders', async () => {
-  const res = await mp.getOrders();
-  expect(typeof res).toBe('object');
-  expect(typeof res[0].id).toBe('string');
-  expect(['pending', 'processing', 'cancelled'].includes(res[0].status)).toBe(true);
-});
-
-test('Get Order By Id', async () => {
-  const res = await mp.getOrderById('1');
-  expect(typeof res).toBe('object');
-  expect(typeof res.id).toBe('string');
-  expect(res.status).toBe('processing');
 });
