@@ -191,7 +191,9 @@ class MP {
    * @memberof MP
    */
   createOrder(data) {
-    return this.$post(`/orders`, { body: data });
+    return this.$post('/orders', {
+      body: JSON.stringify(data)
+    });
   }
 
   /**
@@ -205,7 +207,7 @@ class MP {
    */
   updateOrder(orderId, data) {
     return this.$put(`/orders/${orderId}`, {
-      body: data
+      body: JSON.stringify(data)
     });
   }
 
