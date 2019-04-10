@@ -171,7 +171,7 @@ class MP {
   }
 
   /**
-   * Get order by sku
+   * Get order by id
    *
    * @param {string} id
    * @returns
@@ -180,6 +180,18 @@ class MP {
    */
   getOrderById(id) {
     return this.$get(`/orders/${id}`);
+  }
+
+  /**
+   * Cancel order by id
+   *
+   * @param {string} id
+   * @returns
+   * @see https://knawat-mp.restlet.io/#operation_order_by_id
+   * @memberof MP
+   */
+  cancelOrder(id) {
+    return this.$delete(`/orders/${id}`);
   }
 
   /**
