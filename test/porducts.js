@@ -46,6 +46,31 @@ test('Update product instance', () => {
   });
 });
 
+test('Bulk update product instance', () => {
+  mp.updateBulkProduct({
+    productInstances: [
+      {
+        sku: 'M3POWNI161002-MUV',
+        externalUrl: 'https://test.knawat.io',
+        externalId: '22825',
+        variations: [
+          {
+            sku: 'M3POWNI161002-MUV-38',
+            externalId: '525827'
+          },
+          {
+            sku: 'M3POWNI161002-MUV-40',
+            externalId: '525828'
+          }
+        ]
+      }
+    ]
+  }).then(res => {
+    console.log(res);
+    expect(res.status).toBe('success');
+  });
+});
+
 test('Delete product', () => {
   mp.addProducts(products[0])
     .then(() => mp.deleteProductBySku(products[0].sku))
