@@ -107,7 +107,7 @@ mp.getProductsCount();
 _Retrieve single product information by Product SKU. product should be under this store_
 
 ```javascript
-mp.getProductBySku(sku);
+mp.getProductBySku(sku, data);
 ```
 
 | Params | Type     | Description                    |
@@ -115,6 +115,20 @@ mp.getProductBySku(sku);
 | `sku`  | `string` | SKU of Product you want to get |
 
 <small>https://knawat-mp.restlet.io/#operation_get_product_by_sku</small>
+
+### updateBulkProduct
+
+_Retrieve products information using bulk update. product should be under this store_
+
+```javascript
+mp.updateBulkProduct(data);
+```
+
+| Params | Type     | Description                                                                                                                                                                                                    |
+| ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data` | `object` | `{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}` |
+
+<small>https://knawat-mp.restlet.io/#operation_bulk_update_products</small>
 
 ### deleteProductBySku
 
@@ -204,26 +218,9 @@ mp.updateOrder(order_id, order_data);
 ### GET
 
 ```javascript
-mp.$get(endpoint);
+mp.$req(method, endpoint);
 ```
 
-### POST
-
-```javascript
-mp.$post(endpoint, data);
-```
-
-### PUT
-
-```javascript
-mp.$put(endpoint, data);
-```
-
-### DELETE
-
-```javascript
-mp.$delete(endpoint);
-```
 
 ## Reporting Security Issues
 
