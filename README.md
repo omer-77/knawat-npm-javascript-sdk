@@ -215,7 +215,7 @@ mp.updateOrder(order_id, order_data);
 | `endpoint` | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
 | `data`     | `array`  | Only for POST and PUT, data that will be converted to JSON                   |
 
-### GET
+### Request
 
 ```javascript
 mp.$req(method, endpoint);
