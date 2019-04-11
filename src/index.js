@@ -57,7 +57,7 @@ class MP {
    * @memberof MP
    */
   refreshToken() {
-    return this.$post('/token', {
+    return this.$req('POST', '/token', {
       body: JSON.stringify({
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret
@@ -80,7 +80,7 @@ class MP {
     // Generate url query paramaters
     const params = querystring.stringify({ limit, page, lastUpdate, keyword, hideOutOfStock });
 
-    return this.$get(`/catalog/products?${params}`);
+    return this.$req('GET', `/catalog/products?${params}`);
   }
 
   /**
@@ -92,7 +92,7 @@ class MP {
    * @memberof MP
    */
   getProductBySku(sku) {
-    return this.$get(`/catalog/products/${sku}`);
+    return this.$req('GET', `/catalog/products/${sku}`);
   }
 
   /**
@@ -103,7 +103,7 @@ class MP {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$get(`catalog/products/count`);
+    return this.$req('GET', `catalog/products/count`);
   }
 
   /**
@@ -115,7 +115,7 @@ class MP {
    * @memberof MP
    */
   addProducts(products) {
-    return this.$post('/catalog/products', {
+    return this.$req('POST', '/catalog/products', {
       body: JSON.stringify({ products })
     });
   }
@@ -129,8 +129,22 @@ class MP {
    * @memberof MP
    */
   updateProductBySku(sku, data) {
-    return this.$put(`/catalog/update/${sku}`, {
+    return this.$req('PUT', `/catalog/update/${sku}`, {
       body: JSON.stringify({ data })
+    });
+  }
+
+  /**
+   * Bulk product update
+   *
+   * @param {*} data
+   * @returns
+   * @see
+   * @memberof MP
+   */
+  updateBulkProduct(data) {
+    return this.$req('PATCH', `/catalog/products`, {
+      body: JSON.stringify(data)
     });
   }
 
@@ -142,7 +156,7 @@ class MP {
    * @memberof MP
    */
   deleteProductBySku(sku) {
-    return this.$delete(`/catalog/products/${sku}`);
+    return this.$req('DELETE', `/catalog/products/${sku}`);
   }
 
   /**
@@ -153,7 +167,7 @@ class MP {
    * @memberof MP
    */
   getCategories() {
-    return this.$get('/catalog/categories');
+    return this.$req('GET', '/catalog/categories');
   }
 
   /**
@@ -167,7 +181,7 @@ class MP {
    */
   getOrders(limit = 25, page = 1) {
     const params = querystring.stringify({ limit, page });
-    return this.$get(`/orders?${params}`);
+    return this.$req('GET', `/orders?${params}`);
   }
 
   /**
@@ -179,7 +193,7 @@ class MP {
    * @memberof MP
    */
   getOrderById(id) {
-    return this.$get(`/orders/${id}`);
+    return this.$req('GET', `/orders/${id}`);
   }
 
   /**
@@ -191,7 +205,7 @@ class MP {
    * @memberof MP
    */
   cancelOrder(id) {
-    return this.$delete(`/orders/${id}`);
+    return this.$req('DELETE', `/orders/${id}`);
   }
 
   /**
@@ -203,7 +217,7 @@ class MP {
    * @memberof MP
    */
   createOrder(data) {
-    return this.$post('/orders', {
+    return this.$req('POST', '/orders', {
       body: JSON.stringify(data)
     });
   }
@@ -218,79 +232,21 @@ class MP {
    * @memberof MP
    */
   updateOrder(orderId, data) {
-    return this.$put(`/orders/${orderId}`, {
+    return this.$req('PUT', `/orders/${orderId}`, {
       body: JSON.stringify(data)
     });
   }
 
   /**
    *
-   *
    * @param {string} path
    * @param {object} [options={}]
    * @returns
    * @memberof MP
    */
-  $post(path, options = {}) {
+  $req(method, path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
-      method: 'POST',
-      headers: this.headers,
-      ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
-  }
-
-  /**
-   *
-   * @param {string} path
-   * @param {object} [options={}]
-   * @returns
-   * @memberof MP
-   */
-  $get(path, options = {}) {
-    return fetch(`${MP.baseUrl}${path}`, {
-      method: 'GET',
-      headers: this.headers,
-      ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
-  }
-
-  /**
-   *
-   * @param {string} path
-   * @param {object} [options={}]
-   * @returns
-   * @memberof MP
-   */
-  $put(path, options = {}) {
-    return fetch(`${MP.baseUrl}${path}`, {
-      method: 'PUT',
-      headers: this.headers,
-      ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
-  }
-
-  /**
-   *
-   * @param {string} path
-   * @param {object} [options={}]
-   * @returns
-   * @memberof MP
-   */
-  $delete(path, options = {}) {
-    return fetch(`${MP.baseUrl}${path}`, {
-      method: 'DELETE',
+      method: method,
       headers: this.headers,
       ...options
     })
