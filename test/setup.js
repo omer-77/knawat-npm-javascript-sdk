@@ -1,4 +1,4 @@
-const MP = require('../src/index.js');
+import MP from '../src/index.js';
 
 MP.baseUrl = 'https://dev.mp.knawat.io/api';
 const instance = {
