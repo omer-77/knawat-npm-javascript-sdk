@@ -124,9 +124,13 @@ _Retrieve products information using bulk update. product should be under this s
 mp.updateBulkProduct(data);
 ```
 
-| Params | Type     | Description                                                                                                                                                                                                    |
-| ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data` | `object` | `{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}` |
+| Params | Type     | Description |
+| ------ | -------- | ----------- |
+| `data` | `object` | ```JSON     |
+
+{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}
+
+````|
 
 <small>https://knawat-mp.restlet.io/#operation_bulk_update_products</small>
 
@@ -136,7 +140,7 @@ _Delete Product by Product SKU from store._
 
 ```javascript
 mp.deleteProductBySku(products);
-```
+````
 
 <small>https://knawat-mp.restlet.io/#operation_delete_product_by_sku</small>
 
@@ -218,9 +222,8 @@ mp.updateOrder(order_id, order_data);
 ### Request
 
 ```javascript
-mp.$req(method, endpoint);
+mp.$fetch(method, endpoint);
 ```
-
 
 ## Reporting Security Issues
 
