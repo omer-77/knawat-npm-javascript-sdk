@@ -57,7 +57,7 @@ class MP {
    * @memberof MP
    */
   refreshToken() {
-    return this.$req('POST', '/token', {
+    return this.$fetch('POST', '/token', {
       body: JSON.stringify({
         consumerKey: this.consumerKey,
         consumerSecret: this.consumerSecret
@@ -80,7 +80,7 @@ class MP {
     // Generate url query paramaters
     const params = querystring.stringify({ limit, page, lastUpdate, keyword, hideOutOfStock });
 
-    return this.$req('GET', `/catalog/products?${params}`);
+    return this.$fetch('GET', `/catalog/products?${params}`);
   }
 
   /**
@@ -92,7 +92,7 @@ class MP {
    * @memberof MP
    */
   getProductBySku(sku) {
-    return this.$req('GET', `/catalog/products/${sku}`);
+    return this.$fetch('GET', `/catalog/products/${sku}`);
   }
 
   /**
@@ -103,7 +103,7 @@ class MP {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$req('GET', `catalog/products/count`);
+    return this.$fetch('GET', `catalog/products/count`);
   }
 
   /**
@@ -115,7 +115,7 @@ class MP {
    * @memberof MP
    */
   addProducts(products) {
-    return this.$req('POST', '/catalog/products', {
+    return this.$fetch('POST', '/catalog/products', {
       body: JSON.stringify({ products })
     });
   }
@@ -129,7 +129,7 @@ class MP {
    * @memberof MP
    */
   updateProductBySku(sku, data) {
-    return this.$req('PUT', `/catalog/update/${sku}`, {
+    return this.$fetch('PUT', `/catalog/update/${sku}`, {
       body: JSON.stringify({ data })
     });
   }
@@ -143,7 +143,7 @@ class MP {
    * @memberof MP
    */
   updateBulkProduct(data) {
-    return this.$req('PATCH', `/catalog/products`, {
+    return this.$fetch('PATCH', `/catalog/products`, {
       body: JSON.stringify(data)
     });
   }
@@ -156,7 +156,7 @@ class MP {
    * @memberof MP
    */
   deleteProductBySku(sku) {
-    return this.$req('DELETE', `/catalog/products/${sku}`);
+    return this.$fetch('DELETE', `/catalog/products/${sku}`);
   }
 
   /**
@@ -167,7 +167,7 @@ class MP {
    * @memberof MP
    */
   getCategories() {
-    return this.$req('GET', '/catalog/categories');
+    return this.$fetch('GET', '/catalog/categories');
   }
 
   /**
@@ -181,7 +181,7 @@ class MP {
    */
   getOrders(limit = 25, page = 1) {
     const params = querystring.stringify({ limit, page });
-    return this.$req('GET', `/orders?${params}`);
+    return this.$fetch('GET', `/orders?${params}`);
   }
 
   /**
@@ -193,7 +193,7 @@ class MP {
    * @memberof MP
    */
   getOrderById(id) {
-    return this.$req('GET', `/orders/${id}`);
+    return this.$fetch('GET', `/orders/${id}`);
   }
 
   /**
@@ -205,7 +205,7 @@ class MP {
    * @memberof MP
    */
   cancelOrder(id) {
-    return this.$req('DELETE', `/orders/${id}`);
+    return this.$fetch('DELETE', `/orders/${id}`);
   }
 
   /**
@@ -217,7 +217,7 @@ class MP {
    * @memberof MP
    */
   createOrder(data) {
-    return this.$req('POST', '/orders', {
+    return this.$fetch('POST', '/orders', {
       body: JSON.stringify(data)
     });
   }
@@ -232,19 +232,19 @@ class MP {
    * @memberof MP
    */
   updateOrder(orderId, data) {
-    return this.$req('PUT', `/orders/${orderId}`, {
+    return this.$fetch('PUT', `/orders/${orderId}`, {
       body: JSON.stringify(data)
     });
   }
 
   /**
+   * Fetch data from server
    *
+   * @param {string} method
    * @param {string} path
-   * @param {object} [options={}]
-   * @returns
-   * @memberof MP
+   * @param {object} options
    */
-  $req(method, path, options = {}) {
+  $fetch(method, path, options = {}) {
     return fetch(`${MP.baseUrl}${path}`, {
       method: method,
       headers: this.headers,
