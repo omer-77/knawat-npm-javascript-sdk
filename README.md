@@ -107,7 +107,7 @@ mp.getProductsCount();
 _Retrieve single product information by Product SKU. product should be under this store_
 
 ```javascript
-mp.getProductBySku(sku, data);
+mp.getProductBySku(sku);
 ```
 
 | Params | Type     | Description                    |
@@ -124,9 +124,13 @@ _Retrieve products information using bulk update. product should be under this s
 mp.updateBulkProduct(data);
 ```
 
-| Params | Type     | Description                                                                                                                                                                                                    |
-| ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data` | `object` | `{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}` |
+| Params | Type     | Description |
+| ------ | -------- | ----------- |
+| `data` | `object` | ```JSON     |
+
+{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}
+
+````|
 
 <small>https://knawat-mp.restlet.io/#operation_bulk_update_products</small>
 
@@ -136,7 +140,7 @@ _Delete Product by Product SKU from store._
 
 ```javascript
 mp.deleteProductBySku(products);
-```
+````
 
 <small>https://knawat-mp.restlet.io/#operation_delete_product_by_sku</small>
 
@@ -215,12 +219,11 @@ mp.updateOrder(order_id, order_data);
 | `endpoint` | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
 | `data`     | `array`  | Only for POST and PUT, data that will be converted to JSON                   |
 
-### GET
+### Request
 
 ```javascript
-mp.$req(method, endpoint);
+mp.$fetch(method, endpoint);
 ```
-
 
 ## Reporting Security Issues
 
