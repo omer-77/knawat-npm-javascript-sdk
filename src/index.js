@@ -19,8 +19,8 @@ class MP {
    * @memberof MP
    */
   constructor({ key, secret, token }) {
-    if (!key || !secret) {
-      throw new Error('not a valid consumerKey or consumerSecret');
+    if ((!key || !secret) && !token) {
+      throw new Error('no a valid consumerKey and consumerSecret or token');
     }
 
     this.consumerKey = key;
