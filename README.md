@@ -48,11 +48,11 @@ const mp = new MP({
 
 ### Options
 
-| Option   | Type     | Required | Description                      |
-| -------- | -------- | -------- | -------------------------------- |
-| `key`    | `string` | yes      | Your Store's API consumer key    |
-| `secret` | `string` | yes      | Your Store's API consumer secret |
-| `token`  | `string` | no       | Previous token                   |
+| Option   | Type     | Required    | Description                                                                   |
+| -------- | -------- | ----------- | ----------------------------------------------------------------------------- |
+| `key`    | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
+| `secret` | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
+| `token`  | `string` | conditional | Previous token if key and secret not provided this field is required          |
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
