@@ -107,7 +107,7 @@ mp.getProductsCount();
 _Retrieve single product information by Product SKU. product should be under this store_
 
 ```javascript
-mp.getProductBySku(sku, data);
+mp.getProductBySku(sku);
 ```
 
 | Params | Type     | Description                    |
