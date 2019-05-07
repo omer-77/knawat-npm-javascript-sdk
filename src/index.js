@@ -76,9 +76,23 @@ class MP {
    * @see https://knawat-mp.restlet.io/#operation_get_products
    * @memberof MP
    */
-  getProducts({ limit = 10, page = 1, lastUpdate = null, keyword = null, hideOutOfStock = 0 }) {
+  getProducts({
+    limit = 10,
+    page = 1,
+    lastUpdate = null,
+    keyword = null,
+    hideOutOfStock = 0,
+    currency = 'USD'
+  } = {}) {
     // Generate url query paramaters
-    const params = querystring.stringify({ limit, page, lastUpdate, keyword, hideOutOfStock });
+    const params = querystring.stringify({
+      limit,
+      page,
+      lastUpdate,
+      keyword,
+      hideOutOfStock,
+      currency
+    });
 
     return this.$fetch('GET', `/catalog/products?${params}`);
   }
