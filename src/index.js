@@ -2,6 +2,7 @@ import KnawatMP from './KnawatMP';
 import categories from './api/categories';
 import invoices from './api/invoices';
 import membership from './api/membership';
+import miscellaneous from './api/miscellaneous';
 import orders from './api/orders';
 import products from './api/products';
 import shipping from './api/shipping';
