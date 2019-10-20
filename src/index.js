@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import Fetch from './fetch';
 import querystring from 'querystring';
 
 /**
@@ -6,68 +6,7 @@ import querystring from 'querystring';
  *
  * @class MP
  */
-class MP {
-  static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
-  headers = {
-    'Content-Type': 'application/json'
-  };
-
-  /**
-   * Creates an instance of MP.
-   *
-   * @param {object} activeInstance
-   * @memberof MP
-   */
-  constructor({ key, secret, token }) {
-    if ((!key || !secret) && !token) {
-      throw new Error('no a valid consumerKey and consumerSecret or token');
-    }
-
-    this.consumerKey = key;
-    this.consumerSecret = secret;
-    this.token = token;
-  }
-
-  /**
-   * Generate access token from store key and secret
-   *
-   * @readonly
-   * @memberof MP
-   */
-  get token() {
-    if (!this.myToken) {
-      return this.refreshToken();
-    }
-
-    return this.myToken;
-  }
-
-  set token(val) {
-    if (!val) {
-      return;
-    }
-    this.myToken = val;
-    this.headers.Authorization = `Bearer ${val}`;
-  }
-
-  /**
-   * Generates a new access token
-   *
-   * @returns
-   * @memberof MP
-   */
-  refreshToken() {
-    return this.$fetch('POST', '/token', {
-      body: JSON.stringify({
-        consumerKey: this.consumerKey,
-        consumerSecret: this.consumerSecret
-      })
-    }).then(({ channel }) => {
-      this.token = channel.token;
-      return channel.token;
-    });
-  }
-
+class MP extends Fetch {
   /**
    * Get all imported products
    *
@@ -268,25 +207,6 @@ class MP {
       .join('&');
     return this.$fetch('GET', `/catalog/categories?${params}`);
   };
-
-  /**
-   * Fetch data from server
-   *
-   * @param {string} method
-   * @param {string} path
-   * @param {object} options
-   */
-  $fetch(method, path, options = {}) {
-    return fetch(`${MP.baseUrl}${path}`, {
-      method: method,
-      headers: this.headers,
-      ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
-      });
-  }
 }
 
 module.exports = MP;
