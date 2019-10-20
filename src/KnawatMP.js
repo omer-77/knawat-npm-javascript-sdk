@@ -82,10 +82,12 @@ class KnawatMP {
       method: method,
       headers: this.headers,
       ...options
-    })
-      .then(res => res.json())
-      .catch(error => {
-        throw error;
+    }).then(async res => {
+      const jsonRes = await res.json();
+      if (res.ok) {
+        return jsonRes;
+      }
+      throw jsonRes;
       });
   }
 }
