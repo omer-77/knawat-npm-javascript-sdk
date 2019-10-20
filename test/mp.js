@@ -8,6 +8,6 @@ test('test invalid instance', () => {
 test('Refresh token', () => {
   return mp.refreshToken().then(data => {
     expect(data).toBeDefined();
-    expect(mp.headers.Authorization).toEqual(expect.stringContaining('Bearer'));
+    expect(mp.token).toBeDefined();
   });
 });
