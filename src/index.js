@@ -4,6 +4,7 @@ import invoices from './api/invoices';
 import membership from './api/membership';
 import orders from './api/orders';
 import products from './api/products';
+import shipping from './api/shipping';
 
 KnawatMP._addToPrototype(categories);
 KnawatMP._addToPrototype(invoices);
