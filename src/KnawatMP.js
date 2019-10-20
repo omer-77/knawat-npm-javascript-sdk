@@ -1,10 +1,14 @@
 import fetch from 'node-fetch';
 
-class Fetch {
+class KnawatMP {
   static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
   headers = {
     'Content-Type': 'application/json'
   };
+
+  static _addToPrototype(fns) {
+    Object.entries(fns).forEach(([fnName, fn]) => (this.prototype[fnName] = fn));
+  }
 
   constructor({ key, secret, token }) {
     this.consumerKey = key;
@@ -74,7 +78,7 @@ class Fetch {
    */
   async $fetch(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
-    return fetch(`${Fetch.baseUrl}${path}`, {
+    return fetch(`${KnawatMP.baseUrl}${path}`, {
       method: method,
       headers: this.headers,
       ...options
@@ -86,4 +90,4 @@ class Fetch {
   }
 }
 
-export default Fetch;
+export default KnawatMP;
