@@ -10,7 +10,7 @@ class KnawatMP {
     Object.entries(fns).forEach(([fnName, fn]) => (this.prototype[fnName] = fn));
   }
 
-  constructor({ key, secret, token }) {
+  constructor({ key, secret, token } = {}) {
     this.consumerKey = key;
     this.consumerSecret = secret;
     this.token = token;
@@ -60,7 +60,7 @@ class KnawatMP {
       return;
     }
     if (authType === 'basic') {
-      this.headers.Authorization = `Basic ${this.getBasicAuth}`;
+      this.headers.Authorization = `Basic ${this.getBasicAuth()}`;
       return;
     }
     if (authType === 'token' || !authType) {
@@ -88,7 +88,7 @@ class KnawatMP {
         return jsonRes;
       }
       throw jsonRes;
-      });
+    });
   }
 }
 
