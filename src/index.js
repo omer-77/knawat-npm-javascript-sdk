@@ -252,6 +252,24 @@ class MP {
   }
 
   /**
+   * get invoices list
+   */
+  getInvoices = function() {
+    return this.$fetch('GET', '/invoices');
+  };
+
+  /**
+   * get invoices list
+   * @param {object} args
+   */
+  getCategories = function(args = {}) {
+    const params = Object.entries(args)
+      .map(([key, val]) => `${key}=${val}`)
+      .join('&');
+    return this.$fetch('GET', `/catalog/categories?${params}`);
+  };
+
+  /**
    * Fetch data from server
    *
    * @param {string} method
