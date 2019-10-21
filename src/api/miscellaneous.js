@@ -5,5 +5,5 @@ export default {
    */
   getCurrencyByCode(code) {
     return this.$fetch('GET', `/currencies/${code}`, { auth: 'basic' });
-  }
+  },
 };

@@ -26,7 +26,7 @@ export default {
   addSubscription(body) {
     return this.$fetch('POST', '/subscription', {
       body: JSON.stringify(body),
-      auth: 'basic'
+      auth: 'basic',
     });
   },
 
@@ -37,5 +37,5 @@ export default {
   getCoupon({ membership, coupon }) {
     const path = `/coupons/${coupon}?membership=${membership}`;
     return this.$fetch('GET', path, { auth: 'basic' });
-  }
+  },
 };

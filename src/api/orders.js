@@ -49,7 +49,7 @@ export default {
    */
   createOrder(data) {
     return this.$fetch('POST', '/orders', {
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
   },
 
@@ -64,7 +64,7 @@ export default {
    */
   updateOrder(orderId, data) {
     return this.$fetch('PUT', `/orders/${orderId}`, {
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-  }
+  },
 };

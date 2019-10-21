@@ -5,7 +5,7 @@ export default {
   createStore(store) {
     return this.$fetch('POST', '/stores', {
       body: JSON.stringify(store),
-      auth: 'basic'
+      auth: 'basic',
     });
   },
 
@@ -16,7 +16,7 @@ export default {
     const path = `/stores/${encodeURIComponent(store.toLowerCase())}`;
     return this.$fetch('PUT', path, {
       body: JSON.stringify(data),
-      auth: 'basic'
+      auth: 'basic',
     });
   },
 
@@ -26,9 +26,9 @@ export default {
   getStoresByUser(user, limit = 100) {
     const filter = JSON.stringify({
       where: {
-        'users.email': user.toLowerCase()
+        'users.email': user.toLowerCase(),
       },
-      limit
+      limit,
     });
     return this.$fetch('GET', `/stores?filter=${filter}`, { auth: 'basic' });
   },
@@ -66,6 +66,8 @@ export default {
    * re Sync store
    */
   syncStore(store) {
-    return this.$fetch('PUT', `/stores/${encodeURIComponent(store)}/sync`, { auth: 'basic' });
-  }
+    return this.$fetch('PUT', `/stores/${encodeURIComponent(store)}/sync`, {
+      auth: 'basic',
+    });
+  },
 };

@@ -19,5 +19,5 @@ export default {
       .map(([key, val]) => `${key}=${val}`)
       .join('&');
     return this.$fetch('GET', `/catalog/categories?${params}`);
-  }
+  },
 };

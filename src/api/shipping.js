@@ -21,5 +21,5 @@ export default {
    */
   getAllShipmentPolicies() {
     return this.$fetch('GET', '/shipment', { auth: 'basic' });
-  }
+  },
 };

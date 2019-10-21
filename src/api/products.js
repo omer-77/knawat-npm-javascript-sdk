@@ -15,7 +15,7 @@ export default {
     lastUpdate = null,
     keyword = null,
     hideOutOfStock = 0,
-    currency = 'USD'
+    currency = 'USD',
   } = {}) {
     // Generate url query paramaters
     const params = querystring.stringify({
@@ -24,7 +24,7 @@ export default {
       lastUpdate,
       keyword,
       hideOutOfStock,
-      currency
+      currency,
     });
 
     return this.$fetch('GET', `/catalog/products?${params}`);
@@ -50,7 +50,7 @@ export default {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$fetch('GET', `catalog/products/count`);
+    return this.$fetch('GET', 'catalog/products/count');
   },
 
   /**
@@ -63,7 +63,7 @@ export default {
    */
   addProducts(products) {
     return this.$fetch('POST', '/catalog/products', {
-      body: JSON.stringify({ products })
+      body: JSON.stringify({ products }),
     });
   },
 
@@ -77,7 +77,7 @@ export default {
    */
   updateProductBySku(sku, data) {
     return this.$fetch('PUT', `/catalog/update/${sku}`, {
-      body: JSON.stringify({ data })
+      body: JSON.stringify({ data }),
     });
   },
 
@@ -90,8 +90,8 @@ export default {
    * @memberof MP
    */
   updateBulkProduct(data) {
-    return this.$fetch('PATCH', `/catalog/products`, {
-      body: JSON.stringify(data)
+    return this.$fetch('PATCH', '/catalog/products', {
+      body: JSON.stringify(data),
     });
   },
 
@@ -104,5 +104,5 @@ export default {
    */
   deleteProductBySku(sku) {
     return this.$fetch('DELETE', `/catalog/products/${sku}`);
-  }
+  },
 };

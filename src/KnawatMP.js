@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 class KnawatMP {
   static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
   headers = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
 
   static _addToPrototype(fns) {
@@ -46,8 +46,8 @@ class KnawatMP {
       auth: 'none',
       body: JSON.stringify({
         consumerKey: this.consumerKey,
-        consumerSecret: this.consumerSecret
-      })
+        consumerSecret: this.consumerSecret,
+      }),
     }).then(({ channel }) => {
       this.token = channel.token;
       return channel.token;
@@ -81,7 +81,7 @@ class KnawatMP {
     return fetch(`${KnawatMP.baseUrl}${path}`, {
       method: method,
       headers: this.headers,
-      ...options
+      ...options,
     }).then(async res => {
       const jsonRes = await res.json();
       if (res.ok) {
