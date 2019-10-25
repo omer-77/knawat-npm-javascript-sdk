@@ -12,7 +12,7 @@ export default {
    */
   getOrders(limit = 25, page = 1) {
     const params = querystring.stringify({ limit, page });
-    return this.$fetch('GET', `/orders?${params}`);
+    return this.$fetch('GET', `/orders?${params}`, { auth: 'token' });
   },
 
   /**
@@ -24,7 +24,7 @@ export default {
    * @memberof MP
    */
   getOrderById(id) {
-    return this.$fetch('GET', `/orders/${id}`);
+    return this.$fetch('GET', `/orders/${id}`, { auth: 'token' });
   },
 
   /**
@@ -36,7 +36,7 @@ export default {
    * @memberof MP
    */
   cancelOrder(id) {
-    return this.$fetch('DELETE', `/orders/${id}`);
+    return this.$fetch('DELETE', `/orders/${id}`, { auth: 'token' });
   },
 
   /**
@@ -50,6 +50,7 @@ export default {
   createOrder(data) {
     return this.$fetch('POST', '/orders', {
       body: JSON.stringify(data),
+      auth: 'token',
     });
   },
 
@@ -65,6 +66,7 @@ export default {
   updateOrder(orderId, data) {
     return this.$fetch('PUT', `/orders/${orderId}`, {
       body: JSON.stringify(data),
+      auth: 'token',
     });
   },
 };

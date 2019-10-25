@@ -27,7 +27,7 @@ export default {
       currency,
     });
 
-    return this.$fetch('GET', `/catalog/products?${params}`);
+    return this.$fetch('GET', `/catalog/products?${params}`, { auth: 'token' });
   },
 
   /**
@@ -39,7 +39,7 @@ export default {
    * @memberof MP
    */
   getProductBySku(sku) {
-    return this.$fetch('GET', `/catalog/products/${sku}`);
+    return this.$fetch('GET', `/catalog/products/${sku}`, { auth: 'token'});
   },
 
   /**
@@ -50,7 +50,7 @@ export default {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$fetch('GET', 'catalog/products/count');
+    return this.$fetch('GET', 'catalog/products/count', { auth: 'token'});
   },
 
   /**
@@ -64,6 +64,7 @@ export default {
   addProducts(products) {
     return this.$fetch('POST', '/catalog/products', {
       body: JSON.stringify({ products }),
+      auth: 'token'
     });
   },
 
@@ -78,6 +79,7 @@ export default {
   updateProductBySku(sku, data) {
     return this.$fetch('PUT', `/catalog/update/${sku}`, {
       body: JSON.stringify({ data }),
+      auth: 'token'
     });
   },
 
@@ -92,6 +94,7 @@ export default {
   updateBulkProduct(data) {
     return this.$fetch('PATCH', '/catalog/products', {
       body: JSON.stringify(data),
+      auth: 'token'
     });
   },
 
@@ -103,6 +106,6 @@ export default {
    * @memberof MP
    */
   deleteProductBySku(sku) {
-    return this.$fetch('DELETE', `/catalog/products/${sku}`);
+    return this.$fetch('DELETE', `/catalog/products/${sku}`, { auth: 'token' });
   },
 };

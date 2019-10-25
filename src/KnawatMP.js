@@ -55,16 +55,16 @@ class KnawatMP {
   }
 
   async setAuthHeaders(authType) {
-    if (authType === 'none') {
-      this.headers.Authorization = '';
-      return;
-    }
     if (authType === 'basic') {
       this.headers.Authorization = `Basic ${this.getBasicAuth()}`;
       return;
     }
-    if (authType === 'token' || !authType) {
+    if (authType === 'token') {
       this.headers.Authorization = `Bearer ${await this.getTokenAuth()}`;
+      return;
+    }
+    if (!authType || authType === 'none') {
+      delete this.headers.Authorization;
     }
   }
 
