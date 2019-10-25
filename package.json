@@ -30,7 +30,7 @@
   "homepage": "https://github.com/Knawat/Knawat-NPM-JavaScript-SDK#readme",
   "dependencies": {
     "node-fetch": "^2.3.0",
-    "querystring": "^0.2.0"
+    "qs": "^6.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

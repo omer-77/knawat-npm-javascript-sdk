@@ -1,5 +1,3 @@
-import querystring from 'querystring';
-
 export default {
   /**
    *  Get all current orders
@@ -11,8 +9,8 @@ export default {
    * @memberof MP
    */
   getOrders(limit = 25, page = 1) {
-    const params = querystring.stringify({ limit, page });
-    return this.$fetch('GET', `/orders?${params}`, { auth: 'token' });
+    const queryParams = { limit, page };
+    return this.$fetch('GET', '/orders', { auth: 'token', queryParams });
   },
 
   /**

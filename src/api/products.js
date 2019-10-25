@@ -1,5 +1,3 @@
-import querystring from 'querystring';
-
 export default {
   /**
    * Get all imported products
@@ -18,16 +16,16 @@ export default {
     currency = 'USD',
   } = {}) {
     // Generate url query paramaters
-    const params = querystring.stringify({
+    const queryParams = {
       limit,
       page,
       lastUpdate,
       keyword,
       hideOutOfStock,
       currency,
-    });
+    };
 
-    return this.$fetch('GET', `/catalog/products?${params}`, { auth: 'token' });
+    return this.$fetch('GET', '/catalog/products', { auth: 'token', queryParams });
   },
 
   /**
@@ -39,7 +37,7 @@ export default {
    * @memberof MP
    */
   getProductBySku(sku) {
-    return this.$fetch('GET', `/catalog/products/${sku}`, { auth: 'token'});
+    return this.$fetch('GET', `/catalog/products/${sku}`, { auth: 'token' });
   },
 
   /**
@@ -50,7 +48,7 @@ export default {
    * @memberof MP
    */
   getProductsCount() {
-    return this.$fetch('GET', 'catalog/products/count', { auth: 'token'});
+    return this.$fetch('GET', 'catalog/products/count', { auth: 'token' });
   },
 
   /**
@@ -64,7 +62,7 @@ export default {
   addProducts(products) {
     return this.$fetch('POST', '/catalog/products', {
       body: JSON.stringify({ products }),
-      auth: 'token'
+      auth: 'token',
     });
   },
 
@@ -79,7 +77,7 @@ export default {
   updateProductBySku(sku, data) {
     return this.$fetch('PUT', `/catalog/update/${sku}`, {
       body: JSON.stringify({ data }),
-      auth: 'token'
+      auth: 'token',
     });
   },
 
@@ -94,7 +92,7 @@ export default {
   updateBulkProduct(data) {
     return this.$fetch('PATCH', '/catalog/products', {
       body: JSON.stringify(data),
-      auth: 'token'
+      auth: 'token',
     });
   },
 

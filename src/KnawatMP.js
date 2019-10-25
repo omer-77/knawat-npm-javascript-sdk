@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import qs from 'qs';
 
 class KnawatMP {
   static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
@@ -78,6 +79,9 @@ class KnawatMP {
    */
   async $fetch(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
+    if (options.queryParams) {
+      path += `?${qs.stringify(options.queryParams)}`;
+    }
     return fetch(`${KnawatMP.baseUrl}${path}`, {
       method: method,
       headers: this.headers,
