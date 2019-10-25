@@ -91,7 +91,10 @@ class KnawatMP {
       if (res.ok) {
         return jsonRes;
       }
-      throw jsonRes;
+      throw {
+        statusCode: res.status,
+        ...jsonRes,
+      };
     });
   }
 }
