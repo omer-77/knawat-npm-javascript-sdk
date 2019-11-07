@@ -7,10 +7,18 @@ class KnawatMP {
     'Content-Type': 'application/json',
   };
 
+  /**
+   * Bind a function to the KnawatMP class object prototype
+   * @param {Function} fns
+   */
   static _addToPrototype(fns) {
     Object.entries(fns).forEach(([fnName, fn]) => (this.prototype[fnName] = fn));
   }
 
+  /**
+   * KnawatMP sdk constructor
+   * @param {*} param0 {key: string, secret: string, token: string|null}
+   */
   constructor({ key, secret, token } = {}) {
     this.consumerKey = key;
     this.consumerSecret = secret;
@@ -29,6 +37,10 @@ class KnawatMP {
     return `${Buffer.from(`${user}:${pass}`).toString('base64')}`;
   }
 
+  /**
+   * Return the current token if exists
+   * or create a new one
+   */
   async getTokenAuth() {
     if (!this.token) {
       await this.refreshToken();
@@ -55,6 +67,11 @@ class KnawatMP {
     });
   }
 
+  /**
+   * Based on the current request auth type
+   * set the Authorization header value
+   * @param {string} authType
+   */
   async setAuthHeaders(authType) {
     if (authType === 'basic') {
       this.headers.Authorization = `Basic ${this.getBasicAuth()}`;
@@ -74,7 +91,7 @@ class KnawatMP {
    *
    * @param {string} method
    * @param {string} path
-   * @param {object} options
+   * @param {object} options { queryParams, auth, body, headers }
    * @memberof Fetch
    */
   async $fetch(method, path, options = {}) {

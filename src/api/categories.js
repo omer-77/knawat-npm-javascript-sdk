@@ -12,12 +12,12 @@ export default {
 
   /**
    * get invoices list
-   * @param {object} args
+   * @param {object} queryParams
    */
-  getCategories(args) {
+  getCategories(queryParams) {
     return this.$fetch('GET', '/catalog/categories', {
       auth: 'token',
-      queryParams: args,
+      queryParams,
     });
   },
 };
