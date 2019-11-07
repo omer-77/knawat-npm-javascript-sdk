@@ -79,10 +79,11 @@ class KnawatMP {
    */
   async $fetch(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
+    let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
-      path += `?${qs.stringify(options.queryParams)}`;
+      requestUrl += `?${qs.stringify(options.queryParams)}`;
     }
-    return fetch(`${KnawatMP.baseUrl}${path}`, {
+    return fetch(requestUrl, {
       method: method,
       headers: this.headers,
       ...options,
