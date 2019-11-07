@@ -1,4 +1,7 @@
 export default {
+  /**
+   * Lis all store invoices
+   */
   getInvoices() {
     return this.$fetch('GET', '/invoices', { auth: 'token' });
   },
