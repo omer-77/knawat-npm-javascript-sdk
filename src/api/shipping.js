@@ -5,8 +5,10 @@ export default {
    * @param {number} weight
    */
   getShippingRules(country, weight, price) {
-    const params = `?country=${country}&weight=${weight}&price=${price}`;
-    return this.$fetch('GET', `/shipment/rules${params}`, { auth: 'basic' });
+    return this.$fetch('GET', `/shipment/rules`, {
+      auth: 'basic',
+      queryParams: { country, weight, price },
+    });
   },
 
   /**

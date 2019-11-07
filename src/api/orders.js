@@ -9,8 +9,7 @@ export default {
    * @memberof MP
    */
   getOrders(limit = 25, page = 1) {
-    const queryParams = { limit, page };
-    return this.$fetch('GET', '/orders', { auth: 'token', queryParams });
+    return this.$fetch('GET', '/orders', { auth: 'token', queryParams: { limit, page } });
   },
 
   /**
@@ -47,8 +46,8 @@ export default {
    */
   createOrder(data) {
     return this.$fetch('POST', '/orders', {
-      body: JSON.stringify(data),
       auth: 'token',
+      body: JSON.stringify(data),
     });
   },
 
@@ -63,8 +62,8 @@ export default {
    */
   updateOrder(orderId, data) {
     return this.$fetch('PUT', `/orders/${orderId}`, {
-      body: JSON.stringify(data),
       auth: 'token',
+      body: JSON.stringify(data),
     });
   },
 };

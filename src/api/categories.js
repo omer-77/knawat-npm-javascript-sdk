@@ -14,10 +14,10 @@ export default {
    * get invoices list
    * @param {object} args
    */
-  getCategories(args = {}) {
-    const params = Object.entries(args)
-      .map(([key, val]) => `${key}=${val}`)
-      .join('&');
-    return this.$fetch('GET', `/catalog/categories?${params}`, { auth: 'token' });
+  getCategories(args) {
+    return this.$fetch('GET', '/catalog/categories', {
+      auth: 'token',
+      queryParams: args,
+    });
   },
 };

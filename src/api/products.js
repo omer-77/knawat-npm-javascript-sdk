@@ -7,24 +7,7 @@ export default {
    * @see https://knawat-mp.restlet.io/#operation_get_products
    * @memberof MP
    */
-  getProducts({
-    limit = 10,
-    page = 1,
-    lastUpdate = null,
-    keyword = null,
-    hideOutOfStock = 0,
-    currency = 'USD',
-  } = {}) {
-    // Generate url query paramaters
-    const queryParams = {
-      limit,
-      page,
-      lastUpdate,
-      keyword,
-      hideOutOfStock,
-      currency,
-    };
-
+  getProducts(queryParams) {
     return this.$fetch('GET', '/catalog/products', { auth: 'token', queryParams });
   },
 

@@ -13,11 +13,18 @@ export default {
    * update store data
    */
   updateStore(store, data) {
-    const path = `/stores/${encodeURIComponent(store.toLowerCase())}`;
-    return this.$fetch('PUT', path, {
+    return this.$fetch('PUT', `/stores/${encodeStoreName(store)}`, {
       body: JSON.stringify(data),
       auth: 'basic',
     });
+  },
+
+  /**
+   * get store by its url
+   * @param {string} store store url
+   */
+  getStoreByURL(store) {
+    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, { auth: 'basic' });
   },
 
   /**
@@ -30,44 +37,40 @@ export default {
       },
       limit,
     });
-    return this.$fetch('GET', `/stores?filter=${filter}`, { auth: 'basic' });
-  },
-
-  /**
-   * get store by its url
-   * @param {string} store store url
-   */
-  getStoreByURL(store) {
-    const path = `/stores/${encodeURIComponent(store)}`;
-    return this.$fetch('GET', path, { auth: 'basic' });
+    return this.$fetch('GET', '/stores', { auth: 'basic', queryParams: { filter } });
   },
 
   /**
    * get the current store data
    */
   getCurrentStore() {
-    return this.$fetch('GET', '/stores/me', { auth: 'basic' });
-  },
-
-  /**
-   * get shipping couriers
-   */
-  getStoreLogs(params) {
-    const searchParams = Object.entries(params).reduce((acc, [key, val]) => {
-      if (!val) {
-        return acc;
-      }
-      return (acc += `${key}=${encodeURIComponent(val)}&`);
-    }, '?');
-    return this.$fetch('GET', `/logs${searchParams}`, { auth: 'basic' });
+    return this.$fetch('GET', '/stores/me', { auth: 'token' });
   },
 
   /**
    * re Sync store
    */
   syncStore(store) {
-    return this.$fetch('PUT', `/stores/${encodeURIComponent(store)}/sync`, {
+    return this.$fetch('PUT', `/stores/${encodeStoreName(store)}/sync`, {
       auth: 'basic',
     });
   },
+
+  /**
+   * get shipping couriers
+   */
+  getStoreLogs(params) {
+    const queryParams = { ...params };
+    if (queryParams.storeId) {
+      queryParams.storeId = encodeStoreName(queryParams.storeId);
+    }
+    return this.$fetch('GET', '/logs', { auth: 'basic', queryParams });
+  },
 };
+
+/**
+ * Return an encode version from the store name
+ */
+function encodeStoreName(store) {
+  return encodeURIComponent(store.toLowerCase());
+}

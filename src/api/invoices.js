@@ -10,8 +10,8 @@ export default {
    */
   addPayment(store, body) {
     return this.$fetch('POST', `/payments/${encodeURIComponent(store)}`, {
-      body: JSON.stringify(body),
       auth: 'basic',
+      body: JSON.stringify(body),
     });
   },
 };

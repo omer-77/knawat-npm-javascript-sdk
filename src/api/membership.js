@@ -35,7 +35,9 @@ export default {
    * @param {*} body
    */
   getCoupon({ membership, coupon }) {
-    const path = `/coupons/${coupon}?membership=${membership}`;
-    return this.$fetch('GET', path, { auth: 'basic' });
+    return this.$fetch('GET', `/coupons/${coupon}`, {
+      auth: 'basic',
+      queryParams: { membership },
+    });
   },
 };
