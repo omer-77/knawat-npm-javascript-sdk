@@ -20,6 +20,8 @@
 
 # Knawat Node.js NPM Package (MP)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/57a87a5472f643a0b8b4a920075baa5b)](https://app.codacy.com/app/Knawat/Knawat-NPM-JavaScript-SDK?utm_source=github.com&utm_medium=referral&utm_content=Knawat/Knawat-NPM-JavaScript-SDK&utm_campaign=Badge_Grade_Settings)
+
 A Node.js package for Knawat Dropshipping MP REST API. Easily interact with the Knawat MP REST API using this library.
 
 ## Installation
