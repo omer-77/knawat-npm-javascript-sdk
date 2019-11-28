@@ -1,16 +1,23 @@
 {
+  "plugins": ["jest", "prettier", "@typescript-eslint"],
   "root": true,
   "env": {
     "es6": true,
     "node": true,
-    "commonjs": true,
     "jest": true
   },
-  "plugins": ["babel", "prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended", "prettier"],
-  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
-    "prettier/prettier": ["error"],
-    "babel/semi": 1
+    "prettier/prettier": ["error"]
   }
 }

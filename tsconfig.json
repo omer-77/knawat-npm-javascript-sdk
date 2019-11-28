@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es5",
+    "module": "es2015",
+    "lib": ["es2015", "es2016"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "sourceMap": true,
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "typeRoots": ["node_modules/@types"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

@@ -1,5 +1,5 @@
 const path = require('path');
-const babel = require('rollup-plugin-babel');
+const typescript = require('rollup-plugin-typescript2');
 const version = process.env.VERSION || require('../package.json').version;
 
 const paths = {
@@ -10,7 +10,7 @@ const paths = {
 
 const common = {
   name: 'mp',
-  input: path.join(paths.src, 'index.js'),
+  input: path.join(paths.src, 'index.ts'),
   uglifyOptions: {
     toplevel: true,
     compress: true,
@@ -21,7 +21,7 @@ const common = {
   * (c) ${new Date().getFullYear()}
     * @license MIT
     */`,
-  plugins: [babel()],
+  plugins: [typescript({ useTsconfigDeclarationDir: true })],
 };
 const builds = {
   umd: {
