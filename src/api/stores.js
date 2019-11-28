@@ -1,5 +1,16 @@
 export default {
   /**
+   * list all stores
+   * @param {Object} queryParams search query params
+   */
+  listStores(queryParams) {
+    return this.$fetch('GET', `/admin/stores`, {
+      queryParams,
+      auth: 'basic',
+    });
+  },
+
+  /**
    * get the current store data
    */
   createStore(store) {
