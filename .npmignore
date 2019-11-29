@@ -7,5 +7,5 @@ src
 .vscode
 jest.*
 coverage
-script
+scripts
 test
