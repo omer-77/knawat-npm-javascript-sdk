@@ -20,24 +20,25 @@ export default {
   },
 
   /**
-   *
-   * @param {*} body
+   * Create a new membership
+   * @param {Object} body membership
    */
-  addSubscription(body) {
-    return this.$fetch('POST', '/subscription', {
+  createMembership(body) {
+    return this.$fetch('POST', '/membership', {
       body: JSON.stringify(body),
       auth: 'basic',
     });
   },
 
   /**
-   *
-   * @param {*} body
+   * Update the current membership
+   * @param {string} id
+   * @param {Object} body membership
    */
-  getCoupon({ membership, coupon }) {
-    return this.$fetch('GET', `/coupons/${coupon}`, {
+  updateMembership(id, body) {
+    return this.$fetch('PUT', `/membership/${id}`, {
+      body: JSON.stringify(body),
       auth: 'basic',
-      queryParams: { membership },
     });
   },
 };
