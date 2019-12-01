@@ -1,25 +1,45 @@
-import fetch from 'node-fetch';
+import fetch, { Response, RequestInit } from 'node-fetch';
 import qs from 'qs';
 
+type AuthType = 'basic' | 'token' | 'none';
+type RequestMethod = 'GET' | 'PUT' | 'POST' | 'DELETE' | 'PATCH';
+type HeadersInit = { [key: string]: string };
+interface FetchOptions {
+  auth: AuthType;
+  queryParams?: object;
+  body?: string;
+  headers?: HeadersInit;
+}
+interface MPConfig {
+  key: string;
+  secret: string;
+  token?: string;
+}
+
 class KnawatMP {
-  static baseUrl = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
-  headers = {
+  consumerKey: string;
+  consumerSecret: string;
+  token: string | undefined;
+  [key: string]: any;
+
+  static baseUrl: string = process.env.MP_BASEURL || 'https://mp.knawat.io/api';
+  headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
 
   /**
    * Bind a function to the KnawatMP class object prototype
-   * @param {Function} fns
    */
-  static _addToPrototype(fns) {
-    Object.entries(fns).forEach(([fnName, fn]) => (this.prototype[fnName] = fn));
+  static _addToPrototype(fns: Function): void {
+    Object.entries(fns).forEach(([fnName, fn]: [string, Function]) => {
+      this.prototype[fnName] = fn;
+    });
   }
 
   /**
    * KnawatMP sdk constructor
-   * @param {*} param0 {key: string, secret: string, token: string|null}
    */
-  constructor({ key, secret, token } = {}) {
+  constructor({ key, secret, token }: MPConfig) {
     this.consumerKey = key;
     this.consumerSecret = secret;
     this.token = token;
@@ -28,7 +48,7 @@ class KnawatMP {
   /**
    * Return basic auth buffer
    */
-  getBasicAuth() {
+  getBasicAuth(): string {
     const user = process.env.KNAWAT_USER;
     const pass = process.env.KNAWAT_PASS;
     if (!user || !pass) {
@@ -41,21 +61,18 @@ class KnawatMP {
    * Return the current token if exists
    * or create a new one
    */
-  async getTokenAuth() {
-    if (!this.token) {
-      await this.refreshToken();
+  async getTokenAuth(): Promise<string> {
+    if (typeof this.token === 'string') {
+      return this.token;
     }
-    return this.token;
+    return await this.refreshToken();
   }
 
   /**
    * Generates a new access token
-   *
-   * @returns
-   * @memberof Fetch
    */
-  refreshToken() {
-    return this.$fetch('POST', '/token', {
+  refreshToken(): Promise<string> {
+    return this.$fetch<{ channel: { token: string } }>('POST', '/token', {
       auth: 'none',
       body: JSON.stringify({
         consumerKey: this.consumerKey,
@@ -70,9 +87,8 @@ class KnawatMP {
   /**
    * Based on the current request auth type
    * set the Authorization header value
-   * @param {string} authType
    */
-  async setAuthHeaders(authType) {
+  async setAuthHeaders(authType: AuthType): Promise<void> {
     if (authType === 'basic') {
       this.headers.Authorization = `Basic ${this.getBasicAuth()}`;
       return;
@@ -88,13 +104,12 @@ class KnawatMP {
 
   /**
    * Fetch data from server
-   *
-   * @param {string} method
-   * @param {string} path
-   * @param {object} options { queryParams, auth, body, headers }
-   * @memberof Fetch
    */
-  async $fetch(method, path, options = {}) {
+  async $fetch<T>(
+    method: RequestMethod,
+    path: string,
+    options: FetchOptions
+  ): Promise<T> {
     await this.setAuthHeaders(options.auth);
     let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
@@ -104,7 +119,7 @@ class KnawatMP {
       method: method,
       headers: this.headers,
       ...options,
-    }).then(async res => {
+    }).then(async (res: Response) => {
       const jsonRes = await res.json();
       if (res.ok) {
         return jsonRes;

@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/Knawat/Knawat-NPM-JavaScript-SDK#readme",
   "dependencies": {
+    "@types/node-fetch": "^2.5.4",
+    "@types/qs": "^6.9.0",
     "node-fetch": "^2.3.0",
     "qs": "^6.9.0"
   },
