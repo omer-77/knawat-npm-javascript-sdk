@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: 10.0.0
     - run: npm install
-    - run: npm build
+    - run: npm run build
     - name: Publish if version has been updated
       uses: pascalgn/npm-publish-action@1.1.0
       with:
