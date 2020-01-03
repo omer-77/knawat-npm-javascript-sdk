@@ -11,7 +11,9 @@
     "dev": "node scripts/watcher",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "deploy:patch": "bash scripts/release.sh patch",
+    "deploy:minor": "bash scripts/release.sh minor"
   },
   "repository": {
     "type": "git",
