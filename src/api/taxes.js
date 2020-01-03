@@ -36,9 +36,9 @@ export default {
    * @returns Array<TaxRecord>
    * @memberof MP
    */
-  getRecord(country, classes) {
+  getTaxRecords(country, classes) {
     const queryParams = { class: classes };
-    return this.$fetch('PUT', `/tax/${country}`, {
+    return this.$fetch('GET', `/tax/${country}`, {
       auth: 'basic',
       queryParams,
     });
