@@ -6,8 +6,8 @@ export default {
    * @see https://knawat-mp.restlet.io/#operation_get_list_of_categories
    * @memberof MP
    */
-  getAlCategories() {
-    return this.$fetch('GET', '/catalog/categories', { auth: 'basic' });
+  getAllCategories() {
+    return this.$fetch('GET', '/catalog/categories', { auth: 'token' });
   },
 
   /**
@@ -16,7 +16,7 @@ export default {
    */
   getCategories(queryParams) {
     return this.$fetch('GET', '/catalog/categories', {
-      auth: 'basic',
+      auth: 'token',
       queryParams,
     });
   },
