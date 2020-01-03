@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import qs from 'qs';
 
 class KnawatMP {
-  static baseUrl = process.env.MP_BASE_URL || 'https://mp.knawat.io/api';
+  static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
   headers = {
     'Content-Type': 'application/json',
   };
