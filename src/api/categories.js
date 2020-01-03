@@ -7,7 +7,7 @@ export default {
    * @memberof MP
    */
   getAlCategories() {
-    return this.$fetch('GET', '/catalog/categories', { auth: 'token' });
+    return this.$fetch('GET', '/catalog/categories', { auth: 'basic' });
   },
 
   /**
@@ -16,7 +16,7 @@ export default {
    */
   getCategories(queryParams) {
     return this.$fetch('GET', '/catalog/categories', {
-      auth: 'token',
+      auth: 'basic',
       queryParams,
     });
   },
