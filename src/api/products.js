@@ -59,7 +59,7 @@ export default {
    */
   updateProductBySku(sku, data) {
     return this.$fetch('PUT', `/catalog/update/${sku}`, {
-      body: JSON.stringify({ data }),
+      body: JSON.stringify(data),
       auth: 'token',
     });
   },
