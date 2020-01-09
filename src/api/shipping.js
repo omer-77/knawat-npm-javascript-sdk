@@ -24,4 +24,14 @@ export default {
   getAllShipmentPolicies() {
     return this.$fetch('GET', '/shipment', { auth: 'basic' });
   },
+
+  /**
+   * create shipment policy
+   */
+  createShipmentPolicy(body) {
+    return this.$fetch('POST', '/shipment', {
+      body: JSON.stringify(body),
+      auth: 'basic',
+    });
+  },
 };
