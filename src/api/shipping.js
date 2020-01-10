@@ -41,4 +41,14 @@ export default {
   getShipmentPolicyById(policyId) {
     return this.$fetch('GET', `/shipment/${policyId}`, { auth: 'basic' });
   },
+
+  /**
+   * Update shipment policy data
+   */
+  updateShipmentPolicy(policyId, data) {
+    return this.$fetch('PUT', `/shipment/${policyId}`, {
+      body: JSON.stringify(data),
+      auth: 'basic',
+    });
+  },
 };
