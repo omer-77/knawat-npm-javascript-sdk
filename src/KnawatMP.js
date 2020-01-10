@@ -4,6 +4,7 @@ import qs from 'qs';
 class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
   headers = {
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   };
 
