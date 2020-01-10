@@ -34,4 +34,11 @@ export default {
       auth: 'basic',
     });
   },
+
+  /**
+   * Get shipment policy by id
+   */
+  getShipmentPolicyById(policyId) {
+    return this.$fetch('GET', `/shipment/${policyId}`, { auth: 'basic' });
+  },
 };
