@@ -21,8 +21,11 @@ export default {
   /**
    * get all shipment policies
    */
-  getAllShipmentPolicies() {
-    return this.$fetch('GET', '/shipment', { auth: 'basic' });
+  getAllShipmentPolicies(queryParams) {
+    return this.$fetch('GET', '/shipment', {
+      queryParams,
+      auth: 'basic',
+    });
   },
 
   /**
