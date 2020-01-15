@@ -2,8 +2,11 @@ export default {
   /**
    * Lis all store invoices
    */
-  getInvoices() {
-    return this.$fetch('GET', '/invoices', { auth: 'token' });
+  getInvoices(queryParams) {
+    return this.$fetch('GET', '/invoices', {
+      auth: 'token',
+      queryParams,
+    });
   },
 
   /**
