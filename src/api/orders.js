@@ -1,15 +1,14 @@
 export default {
   /**
-   *  Get all current orders
+   *  Search in orders
    *
-   * @param {number} [limit=25]
-   * @param {number} [page=1]
+   * @param {Object} queryParams
    * @returns
    * @see https://knawat-mp.restlet.io/#operation_get_order_s_
    * @memberof MP
    */
-  getOrders(limit = 25, page = 1) {
-    return this.$fetch('GET', '/orders', { auth: 'token', queryParams: { limit, page } });
+  getOrders(queryParams) {
+    return this.$fetch('GET', '/orders', { auth: 'token', queryParams });
   },
 
   /**
