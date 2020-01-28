@@ -20,7 +20,7 @@ export default {
    * @memberof MP
    */
   getProductsByVariationSku(skus) {
-    return this.$fetch('GET', '/products/variation', { auth: 'basic', queryParams });
+    return this.$fetch('GET', '/products/variation', { auth: 'basic', queryParams: { skus } });
   },
 
   /**
