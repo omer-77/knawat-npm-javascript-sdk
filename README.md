@@ -39,7 +39,7 @@ Check out the Knawat Dropshipping MP REST API endpoints and data that can be man
 Setup for the new Knawat Dropshipping REST API integration:
 
 ```javascript
-const MP = require('knawat/mp');
+const MP = require('@knawat/mp');
 
 const mp = new MP({
   key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
