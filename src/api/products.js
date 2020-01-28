@@ -16,7 +16,7 @@ export default {
    *
    * @param {array} skus Array of SKUs
    * @returns
-   * @see https://docs.knawat.io/#tag/My-Products/paths/~1products~1variation/get
+   * @see https://docs.knawat.io/#tag/Products/paths/~1products~1{sku}/get
    * @memberof MP
    */
   getProductsByVariationSku(skus) {
