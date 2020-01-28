@@ -12,6 +12,18 @@ export default {
   },
 
   /**
+   * Get all imported products by variation SKU(s)
+   *
+   * @param {array} skus Array of SKUs
+   * @returns
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1products~1variation/get
+   * @memberof MP
+   */
+  getProductsByVariationSku(skus) {
+    return this.$fetch('GET', '/catalog/products', { auth: 'token', queryParams });
+  },
+
+  /**
    * Get product by sku
    *
    * @param {string} sku
