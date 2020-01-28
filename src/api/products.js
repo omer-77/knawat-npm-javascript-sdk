@@ -2,9 +2,9 @@ export default {
   /**
    * Get all imported products
    *
-   * @param {object} { limit = 10, page = 1, lastUpdate = null, keyword = null, hideOutOfStock = 0 }
+   * @param {object} { limit = 10, page = 1, lastupdate = null, keyword = null, hideOutOfStock = 0, externalId = null }
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_get_products
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get
    * @memberof MP
    */
   getProducts(queryParams) {
@@ -16,7 +16,7 @@ export default {
    *
    * @param {string} sku
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_get_product_by_sku
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get
    * @memberof MP
    */
   getProductBySku(sku) {
@@ -27,7 +27,7 @@ export default {
    * Get total number of imported products
    *
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_products_count
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1count/get
    * @memberof MP
    */
   getProductsCount() {
@@ -39,7 +39,7 @@ export default {
    *
    * @param {array*} products
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_add_to_my_products
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/post
    * @memberof MP
    */
   addProducts(products) {
@@ -52,9 +52,10 @@ export default {
   /**
    * Update product external IDs by SKU
    *
-   * @param {*} data
+   * @param {string} sku
+   * @param {object} data
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_update_product
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/put
    * @memberof MP
    */
   updateProductBySku(sku, data) {
@@ -67,9 +68,9 @@ export default {
   /**
    * Bulk product update
    *
-   * @param {*} data
+   * @param {object} data
    * @returns
-   * @see
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/patch
    * @memberof MP
    */
   updateBulkProduct(data) {
@@ -82,8 +83,9 @@ export default {
   /**
    * Remove product from my list
    *
+   * @param {string} sku
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_delete_product_by_sku
+   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/delete
    * @memberof MP
    */
   deleteProductBySku(sku) {
