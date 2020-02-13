@@ -31,17 +31,26 @@ export default {
   /**
    * Update a new tax record
    *
-   * @param {string} country
-   * @param {Array} classes
+   * @param {object} queryParams
    * @returns Array<TaxRecord>
    * @memberof MP
    */
-  getTaxRecords(country, classes) {
-    const queryParams = { class: classes };
-    return this.$fetch('GET', `/tax/${country}`, {
+  getTaxRecords(queryParams) {
+    return this.$fetch('GET', '/tax', {
       auth: 'basic',
       queryParams,
     });
+  },
+
+  /**
+   * Update a new tax record
+   *
+   * @param {object} queryParams
+   * @returns Array<TaxRecord>
+   * @memberof MP
+   */
+  getTaxById(id) {
+    return this.$fetch('GET', `/tax/${id}`, { auth: 'basic' });
   },
 
   /**
