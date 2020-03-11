@@ -2,8 +2,11 @@ export default {
   /**
    * List all coupons
    */
-  listCoupons() {
-    return this.$fetch('GET', '/coupons', { auth: 'basic' });
+  listCoupons(queryParams) {
+    return this.$fetch('GET', '/coupons', {
+      auth: 'basic',
+      queryParams,
+    });
   },
 
   /**
@@ -20,10 +23,10 @@ export default {
    *
    * @param {*} body
    */
-  getCoupon({ membership, coupon }) {
+  getCoupon(coupon, queryParams) {
     return this.$fetch('GET', `/coupons/${coupon}`, {
       auth: 'basic',
-      queryParams: { membership },
+      queryParams,
     });
   },
 
