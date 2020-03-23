@@ -31,8 +31,11 @@ export default {
    * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get
    * @memberof MP
    */
-  getProductBySku(sku) {
-    return this.$fetch('GET', `/catalog/products/${sku}`, { auth: 'token' });
+  getProductBySku(sku, queryParams) {
+    return this.$fetch('GET', `/catalog/products/${sku}`, {
+      auth: 'token',
+      queryParams,
+    });
   },
 
   /**
