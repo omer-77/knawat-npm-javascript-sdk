@@ -34,8 +34,9 @@ export default {
    * get store by its url
    * @param {string} store store url
    */
-  getStoreByURL(store, queryParams = {}) {
-    if (!queryParams.withBalance) {
+  getStoreByURL(store, params) {
+    const queryParams = { ...params };
+    if (!('withBalance' in queryParams)) {
       queryParams.withBalance = 1;
     }
 
