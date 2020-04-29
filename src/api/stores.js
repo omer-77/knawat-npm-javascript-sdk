@@ -34,8 +34,13 @@ export default {
    * get store by its url
    * @param {string} store store url
    */
-  getStoreByURL(store) {
-    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, { auth: 'basic' });
+  getStoreByURL(store, params) {
+    const queryParams = { ...params };
+    if (!('withBalance' in queryParams)) {
+      queryParams.withBalance = 1;
+    }
+
+    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, { auth: 'basic', queryParams });
   },
 
   /**
