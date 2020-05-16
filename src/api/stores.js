@@ -40,7 +40,10 @@ export default {
       queryParams.withBalance = 1;
     }
 
-    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, { auth: 'basic', queryParams });
+    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, {
+      auth: 'basic',
+      queryParams,
+    });
   },
 
   /**

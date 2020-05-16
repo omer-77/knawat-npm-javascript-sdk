@@ -105,7 +105,7 @@ class KnawatMP {
       method: method,
       headers: this.headers,
       ...options,
-    }).then(async res => {
+    }).then(async (res) => {
       const jsonRes = await res.json();
       if (res.ok) {
         return jsonRes;
