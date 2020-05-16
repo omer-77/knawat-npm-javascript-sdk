@@ -74,22 +74,11 @@ export default {
       auth: 'basic',
     });
   },
-
-  /**
-   * get shipping couriers
-   */
-  getStoreLogs(params) {
-    const queryParams = { ...params };
-    if (queryParams.storeId) {
-      queryParams.storeId = encodeStoreName(queryParams.storeId);
-    }
-    return this.$fetch('GET', '/logs', { auth: 'basic', queryParams });
-  },
 };
 
 /**
  * Return an encode version from the store name
  */
-function encodeStoreName(store) {
+export function encodeStoreName(store) {
   return encodeURIComponent(store.toLowerCase());
 }
