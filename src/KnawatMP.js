@@ -112,6 +112,7 @@ class KnawatMP {
       }
       throw {
         statusCode: res.status,
+        path,
         ...jsonRes,
       };
     });
