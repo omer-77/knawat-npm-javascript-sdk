@@ -68,11 +68,21 @@ export default {
 
   /**
    * re Sync store
+   *
+   * @param {String} store
+   * @param {boolean} [force=false] force sync the store
+   * @returns store
    */
-  syncStore(store) {
-    return this.$fetch('PUT', `/stores/${encodeStoreName(store)}/sync`, {
-      auth: 'basic',
-    });
+  syncStore(store, force = false) {
+    return this.$fetch(
+      'PUT',
+      `/stores/${encodeStoreName(store)}/sync${
+        force ? `timestamp=${Math.random()}` : ''
+      }`,
+      {
+        auth: 'basic',
+      }
+    );
   },
 };
 
