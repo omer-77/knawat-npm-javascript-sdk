@@ -40,7 +40,10 @@ export default {
       queryParams.withBalance = 1;
     }
 
-    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, { auth: 'basic', queryParams });
+    return this.$fetch('GET', `/stores/${encodeStoreName(store)}`, {
+      auth: 'basic',
+      queryParams,
+    });
   },
 
   /**
@@ -65,28 +68,27 @@ export default {
 
   /**
    * re Sync store
+   *
+   * @param {String} store
+   * @param {boolean} [force=false] force sync the store
+   * @returns store
    */
-  syncStore(store) {
-    return this.$fetch('PUT', `/stores/${encodeStoreName(store)}/sync`, {
-      auth: 'basic',
-    });
-  },
-
-  /**
-   * get shipping couriers
-   */
-  getStoreLogs(params) {
-    const queryParams = { ...params };
-    if (queryParams.storeId) {
-      queryParams.storeId = encodeStoreName(queryParams.storeId);
-    }
-    return this.$fetch('GET', '/logs', { auth: 'basic', queryParams });
+  syncStore(store, force = false) {
+    return this.$fetch(
+      'PUT',
+      `/stores/${encodeStoreName(store)}/sync${
+        force ? `timestamp=${Math.random()}` : ''
+      }`,
+      {
+        auth: 'basic',
+      }
+    );
   },
 };
 
 /**
  * Return an encode version from the store name
  */
-function encodeStoreName(store) {
+export function encodeStoreName(store) {
   return encodeURIComponent(store.toLowerCase());
 }
