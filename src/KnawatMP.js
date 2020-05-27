@@ -42,18 +42,12 @@ class KnawatMP {
     return `${Buffer.from(`${user}:${pass}`).toString('base64')}`;
   }
 
-
   /**
    * Get the current store credentials
    */
-  getCurrentStoreCredentials() {
+  async setCurrentStoreCredentials() {
     // Return the current key and secret
-    if (this.key && this.secret) {
-      return {
-        consumerKey: this.key,
-        consumerSecret: this.secret,
-      }
-    }
+    if (this.key && this.secret) return;
 
     // Try to get credentials from store url
     if (this.store) {
@@ -61,24 +55,25 @@ class KnawatMP {
       const storeDoc = await this.$fetch('GET', `/stores/${storeEncoded}`, {
         auth: 'basic',
         queryParams: { withoutBalance: 1 },
-      }).catch(e => { throw e });
+      }).catch(e => {
+        throw e;
+      });
 
       // Store credentials for future use
       this.key = storeDoc.consumerKey;
       this.secret = storeDoc.consumerSecret;
-      return this.getCurrentStoreCredentials();
     }
 
-    throw new Error('Can not get a store credentials');
-   }
+    throw new Error('Store URL is missing; Can not get the store credentials.');
+  }
   /**
    * Return the current token if exists
    * or create a new one
    */
   async getTokenAuth() {
     if (!this.token) {
-      const credentials = await this.getCurrentStoreCredentials();
-      this.token = await this.refreshToken(credentials);
+      await this.setCurrentStoreCredentials();
+      this.token = await this.refreshToken();
     }
     return this.token;
   }
@@ -89,10 +84,13 @@ class KnawatMP {
    * @returns
    * @memberof Fetch
    */
-  refreshToken(credentials) {
+  refreshToken() {
     return this.$fetch('POST', '/token', {
       auth: 'none',
-      body: JSON.stringify(credentials),
+      body: JSON.stringify({
+        consumerKey: this.key,
+        consumerSecret: this.secret,
+      }),
     }).then(({ channel }) => {
       return channel.token;
     });
