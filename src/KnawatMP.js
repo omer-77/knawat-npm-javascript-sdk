@@ -25,7 +25,7 @@ class KnawatMP {
     this.secret = secret;
     this.store = store;
 
-    // for backward computability
+    // For backward compatibility
     this.consumerKey = key;
     this.consumerSecret = secret;
   }
