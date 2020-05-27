@@ -62,9 +62,9 @@ class KnawatMP {
       // Store credentials for future use
       this.key = storeDoc.consumerKey;
       this.secret = storeDoc.consumerSecret;
+    } else {
+      throw new Error('Store URL is missing; Can not get the store credentials.');
     }
-
-    throw new Error('Store URL is missing; Can not get the store credentials.');
   }
   /**
    * Return the current token if exists
