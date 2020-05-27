@@ -60,8 +60,8 @@ class KnawatMP {
       });
 
       // Store credentials for future use
-      this.key = storeDoc.consumerKey;
-      this.secret = storeDoc.consumerSecret;
+      this.key = storeDoc.consumer_key;
+      this.secret = storeDoc.consumer_secret;
     } else {
       throw new Error('Store URL is missing; Can not get the store credentials.');
     }
