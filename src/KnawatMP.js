@@ -18,12 +18,16 @@ class KnawatMP {
 
   /**
    * KnawatMP sdk constructor
-   * @param {*} param0 {key: string, secret: string, token: string|null}
+   * @param {*} param0 {key: string|null, secret: string|null, store: string|null}
    */
-  constructor({ key, secret, token } = {}) {
+  constructor({ key, secret, store } = {}) {
+    this.key = key;
+    this.secret = secret;
+    this.store = store;
+
+    // for backward computability
     this.consumerKey = key;
     this.consumerSecret = secret;
-    this.token = token;
   }
 
   /**
@@ -38,13 +42,43 @@ class KnawatMP {
     return `${Buffer.from(`${user}:${pass}`).toString('base64')}`;
   }
 
+
+  /**
+   * Get the current store credentials
+   */
+  getCurrentStoreCredentials() {
+    // Return the current key and secret
+    if (this.key && this.secret) {
+      return {
+        consumerKey: this.key,
+        consumerSecret: this.secret,
+      }
+    }
+
+    // Try to get credentials from store url
+    if (this.store) {
+      const storeEncoded = encodeURIComponent(this.store.toLowerCase());
+      const storeDoc = await this.$fetch('GET', `/stores/${storeEncoded}`, {
+        auth: 'basic',
+        queryParams: { withoutBalance: 1 },
+      }).catch(e => { throw e });
+
+      // Store credentials for future use
+      this.key = storeDoc.consumerKey;
+      this.secret = storeDoc.consumerSecret;
+      return this.getCurrentStoreCredentials();
+    }
+
+    throw new Error('Can not get a store credentials');
+   }
   /**
    * Return the current token if exists
    * or create a new one
    */
   async getTokenAuth() {
     if (!this.token) {
-      await this.refreshToken();
+      const credentials = await this.getCurrentStoreCredentials();
+      this.token = await this.refreshToken(credentials);
     }
     return this.token;
   }
@@ -55,15 +89,11 @@ class KnawatMP {
    * @returns
    * @memberof Fetch
    */
-  refreshToken() {
+  refreshToken(credentials) {
     return this.$fetch('POST', '/token', {
       auth: 'none',
-      body: JSON.stringify({
-        consumerKey: this.consumerKey,
-        consumerSecret: this.consumerSecret,
-      }),
+      body: JSON.stringify(credentials),
     }).then(({ channel }) => {
-      this.token = channel.token;
       return channel.token;
     });
   }
