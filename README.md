@@ -59,7 +59,7 @@ const mp = new MP({
 | -------- | -------- | ----------- | ----------------------------------------------------------------------------- |
 | `key`    | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
 | `secret` | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
-| `store`  | `string` | conditional | Your store current store URL |
+| `store`  | `string` | conditional | Your store current store URL                                                  |
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
