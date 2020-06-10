@@ -48,6 +48,7 @@ class KnawatMP {
   async setCurrentStoreCredentials() {
     // Return the current key and secret
     if (this.key && this.secret) return;
+    if (this.consumerKey && this.consumerSecret) return;
 
     // Try to get credentials from store url
     if (this.store) {
@@ -88,8 +89,8 @@ class KnawatMP {
     return this.$fetch('POST', '/token', {
       auth: 'none',
       body: JSON.stringify({
-        consumerKey: this.key,
-        consumerSecret: this.secret,
+        consumerKey: this.key || this.consumerKey,
+        consumerSecret: this.secret || this.consumerSecret,
       }),
     }).then(({ channel }) => {
       return channel.token;
