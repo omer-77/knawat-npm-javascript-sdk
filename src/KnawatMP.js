@@ -60,6 +60,7 @@ class KnawatMP {
         throw e;
       });
 
+      this.$store = storeDoc;
       // Store credentials for future use
       this.key = storeDoc.consumer_key;
       this.secret = storeDoc.consumer_secret;
@@ -74,7 +75,7 @@ class KnawatMP {
   async getTokenAuth() {
     if (!this.token) {
       await this.setCurrentStoreCredentials();
-      this.token = await this.refreshToken();
+      await this.refreshToken();
     }
     return this.token;
   }
@@ -93,6 +94,7 @@ class KnawatMP {
         consumerSecret: this.secret || this.consumerSecret,
       }),
     }).then(({ channel }) => {
+      this.token = channel.token;
       return channel.token;
     });
   }
