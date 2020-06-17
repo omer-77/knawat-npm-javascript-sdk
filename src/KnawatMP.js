@@ -60,6 +60,7 @@ class KnawatMP {
         throw e;
       });
 
+      this.$store = storeDoc;
       // Store credentials for future use
       this.key = storeDoc.consumer_key;
       this.secret = storeDoc.consumer_secret;
