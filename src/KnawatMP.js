@@ -74,7 +74,7 @@ class KnawatMP {
   async getTokenAuth() {
     if (!this.token) {
       await this.setCurrentStoreCredentials();
-      this.token = await this.refreshToken();
+      await this.refreshToken();
     }
     return this.token;
   }
@@ -93,6 +93,7 @@ class KnawatMP {
         consumerSecret: this.secret || this.consumerSecret,
       }),
     }).then(({ channel }) => {
+      this.token = channel.token;
       return channel.token;
     });
   }
