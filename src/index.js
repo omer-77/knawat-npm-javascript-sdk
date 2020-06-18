@@ -18,6 +18,7 @@ KnawatMP._addToPrototype(invoices);
 KnawatMP._addToPrototype(membership);
 KnawatMP._addToPrototype(miscellaneous);
 KnawatMP._addToPrototype(orders);
+KnawatMP._addToPrototype(payments);
 KnawatMP._addToPrototype(products);
 KnawatMP._addToPrototype(shipping);
 KnawatMP._addToPrototype(stores);
