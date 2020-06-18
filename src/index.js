@@ -5,6 +5,7 @@ import invoices from './api/invoices';
 import membership from './api/memberships';
 import miscellaneous from './api/miscellaneous';
 import orders from './api/orders';
+import payments from './api/payments';
 import products from './api/products';
 import shipping from './api/shipping';
 import stores from './api/stores';
