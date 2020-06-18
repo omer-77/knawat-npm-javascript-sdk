@@ -77,7 +77,7 @@ export default {
     return this.$fetch(
       'PUT',
       `/stores/${encodeStoreName(store)}/sync${
-        force ? `timestamp=${Math.random()}` : ''
+        force ? `?timestamp=${Math.random()}` : ''
       }`,
       {
         auth: 'basic',
