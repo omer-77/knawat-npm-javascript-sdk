@@ -11,12 +11,13 @@ export default {
 
   /**
    * Get a membership package by id
+   *
    * @param {string} id
+   * @param {object} queryParams used to pass country and coupons
    * @returns
-   * @memberof MP
    */
-  getMembershipById(id) {
-    return this.$fetch('GET', `/membership/${id}`, { auth: 'basic' });
+  getMembershipById(id, queryParams) {
+    return this.$fetch('GET', `/membership/${id}`, { auth: 'basic', queryParams });
   },
 
   /**
