@@ -21,5 +21,5 @@ export default {
       auth: 'token',
       body: JSON.stringify(data),
     });
-  }
+  },
 };
