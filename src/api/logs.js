@@ -1,5 +1,3 @@
-import { encodeStoreName } from './stores';
-
 export default {
   /**
    * get logs by store
@@ -8,11 +6,7 @@ export default {
    * @returns
    * @see http://docs.knawat.io/#tag/Enterprise-Only/paths/~1logs/get
    */
-  getStoreLogs(params) {
-    const queryParams = { ...params };
-    if (queryParams.storeId) {
-      queryParams.storeId = encodeStoreName(queryParams.storeId);
-    }
+  getStoreLogs(queryParams) {
     return this.$fetch('GET', '/logs', { auth: 'basic', queryParams });
   },
   /**
