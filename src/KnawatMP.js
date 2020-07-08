@@ -130,7 +130,7 @@ class KnawatMP {
     await this.setAuthHeaders(options.auth);
     let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
-      requestUrl += `?${qs.stringify(options.queryParams, { indices: false })}`;
+      requestUrl += `?${qs.stringify(options.queryParams, { arrayFormat: 'brackets' })}`;
     }
     return fetch(requestUrl, {
       method: method,
