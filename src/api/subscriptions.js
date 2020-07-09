@@ -18,6 +18,16 @@ export default {
   },
 
   /**
+   * Cancel subscription
+   *
+   * @param {*} id
+   * @returns
+   */
+  cancelSubscription(id) {
+    return this.$fetch('DELETE', `/subscription/${id}`, { auth: 'basic' });
+  },
+
+  /**
    * Update a subscription
    * @param {String} id
    * @param {body} body subscription
