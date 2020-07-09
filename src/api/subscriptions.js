@@ -1,9 +1,15 @@
 export default {
   /**
    * List all subscriptions
+   *
+   * @param {*} queryParams
+   * @returns
    */
-  listSubscriptions() {
-    return this.$fetch('GET', '/subscription', { auth: 'basic' });
+  listSubscriptions(queryParams) {
+    return this.$fetch('GET', '/subscription', {
+      queryParams,
+      auth: 'basic',
+    });
   },
 
   /**
