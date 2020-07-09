@@ -20,10 +20,10 @@ export default {
   /**
    * Cancel subscription
    *
-   * @param {*} body
+   * @param {*} id
    * @returns
    */
-  cancelSubscription(body) {
+  cancelSubscription(id) {
     return this.$fetch('DELETE', `/subscription/${id}`, { auth: 'basic' });
   },
 
