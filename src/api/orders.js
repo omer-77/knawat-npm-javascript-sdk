@@ -44,7 +44,7 @@ export default {
    * @memberof MP
    */
   payOrder(id) {
-    return this.$fetch('PUT', `/orders/${id}`, { auth: 'token' });
+    return this.$fetch('PUT', `/orders/pay/${id}`, { auth: 'token' });
   },
 
   /**
