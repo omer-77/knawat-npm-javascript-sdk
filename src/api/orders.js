@@ -36,6 +36,18 @@ export default {
   },
 
   /**
+   * Cancel order by id
+   *
+   * @param {string} id
+   * @returns
+   * @see https://knawat-mp.restlet.io/#operation_order_by_id
+   * @memberof MP
+   */
+  payOrder(id) {
+    return this.$fetch('PUT', `/orders/${id}`, { auth: 'token' });
+  },
+
+  /**
    * Create new order
    *
    * @param {array} data
