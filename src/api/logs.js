@@ -33,8 +33,9 @@ export default {
     topicId,
     payload = {},
   }) {
+    const auth = storeId ? 'token' : 'basic';
     return this.$fetch('POST', '/logs', {
-      auth: 'basic',
+      auth,
       body: JSON.stringify({
         storeId,
         topic,
