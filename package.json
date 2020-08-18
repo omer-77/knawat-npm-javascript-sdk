@@ -5,6 +5,7 @@
   "module": "dist/mp.esm.js",
   "unpkg": "dist/mp.js",
   "main": "dist/mp.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "lint": "eslint src/** --fix",
     "build": "NODE_ENV=production node scripts/build",
