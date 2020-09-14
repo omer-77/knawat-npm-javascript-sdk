@@ -12,6 +12,16 @@ export default {
   },
 
   /**
+   *
+   * @param {*} orderId
+   */
+  getOrderWarnings(orderId) {
+    return this.$fetch('GET', `/orders/${orderId}/warnings`, {
+      auth: 'token',
+    });
+  },
+
+  /**
    * Get order by id
    *
    * @param {string} id
