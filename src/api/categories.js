@@ -3,7 +3,6 @@ export default {
    * Get all catalog categories
    *
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_get_list_of_categories
    * @memberof MP
    */
   getAllCategories() {

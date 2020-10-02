@@ -4,7 +4,6 @@ export default {
    *
    * @param {array} skus Array of SKUs
    * @returns
-   * @see https://docs.knawat.io/#tag/Products/paths/~1products~1{sku}/get
    * @memberof MP
    */
   getProductsByVariationSku(skus) {
@@ -19,7 +18,6 @@ export default {
    *
    * @param {string} sku
    * @returns
-   * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get
    * @memberof MP
    */
   getProductBySku(sku, queryParams) {
