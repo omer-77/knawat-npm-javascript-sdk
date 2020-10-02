@@ -4,7 +4,6 @@ export default {
    *
    * @param {Object} queryParams
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_get_order_s_
    * @memberof MP
    */
   getOrders(queryParams) {
@@ -26,7 +25,6 @@ export default {
    *
    * @param {string} id
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_order_by_id
    * @memberof MP
    */
   getOrderById(id) {
@@ -38,7 +36,6 @@ export default {
    *
    * @param {string} id
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_order_by_id
    * @memberof MP
    */
   cancelOrder(id) {
@@ -50,7 +47,6 @@ export default {
    *
    * @param {string} id
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_order_by_id
    * @memberof MP
    */
   payOrder(id) {
@@ -62,7 +58,6 @@ export default {
    *
    * @param {array} data
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_create_order
    * @memberof MP
    */
   createOrder(data) {
@@ -78,7 +73,6 @@ export default {
    * @param {string} orderId
    * @param {array} data
    * @returns
-   * @see https://knawat-mp.restlet.io/#operation_update_order
    * @memberof MP
    */
   updateOrder(orderId, data) {

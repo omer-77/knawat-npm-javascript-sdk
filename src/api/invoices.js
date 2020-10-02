@@ -11,10 +11,8 @@ export default {
 
   /**
    * Apply credits to invoice
-   * @param {string} id 
-   * @param {object} payload 
-   * 
-   * @see https://docs.knawat.io/#tag/Invoices/paths/~1invoices~1{id}~1credits/post
+   * @param {string} id
+   * @param {object} payload
    */
   applyCreditsToInvoice(id, data) {
     return this.$fetch('POST', `/invoices/${id}/credits`, {

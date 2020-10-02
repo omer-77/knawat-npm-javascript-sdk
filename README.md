@@ -27,7 +27,9 @@ A Node.js package for Knawat Dropshipping MP REST API. Easily interact with the 
 ## Installation
 
 ```
-npm install --save @knawat/mp
+npm install @knawat/mp --save
+
+yarn add @kanwat/mp
 ```
 
 ## Getting started
@@ -48,6 +50,7 @@ const mp = new MP({
 });
 
 // Or use your store id/URL
+// Supported using basic auth only
 const mp = new MP({
   store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
 });
@@ -63,161 +66,73 @@ const mp = new MP({
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
-# Methods
+## Available resources and methods
 
-## Product Methods
-
-### getProducts
-
-_Retrieve the list of all products or products for this channel, sorted by create date DESC_
-
-```javascript
-mp.getProducts(limit, page, lastupdate);
-```
-
-| Params           | Type     | Required | Description                                                                      |
-| ---------------- | -------- | -------- | -------------------------------------------------------------------------------- |
-| `limit`          | `Number` | No       | Number of products to retrieve. `Default: 10`                                    |
-| `page`           | `Number` | No       | Number of the page to retrieve. `Default: 1`                                     |
-| `lastupdate`     | `Number` | No       | UTC Timestamp of last import. for get only updated products after this Timestamp |
-| `keyword`        | `String` | No       | Text to search in product SKU                                                    |
-| `hideOutOfStock` | `Number` | No       | 1 = hide out of stock products `Default: 0`                                      |
-
-<small>https://knawat-mp.restlet.io/#operation_get_products</small>
-
-### addProducts
-
-_Add products to my list_
-
-```javascript
-mp.addProducts(products);
-```
-
-| Option     | Type    | Required | Description                       |
-| ---------- | ------- | -------- | --------------------------------- |
-| `products` | `array` | yes      | Array of SKUs `[{ sku: '1234' }]` |
-
-<small>https://knawat-mp.restlet.io/#operation_add_to_my_products</small>
-
-### getProductsCount
-
-_Get in stock products count_
-
-```javascript
-mp.getProductsCount();
-```
-
-<small>https://knawat-mp.restlet.io/#operation_products_count</small>
-
-### getProductBySku
-
-_Retrieve single product information by Product SKU. product should be under this store_
-
-```javascript
-mp.getProductBySku(sku);
-```
-
-| Params | Type     | Description                    |
-| ------ | -------- | ------------------------------ |
-| `sku`  | `string` | SKU of Product you want to get |
-
-<small>https://knawat-mp.restlet.io/#operation_get_product_by_sku</small>
-
-### updateBulkProduct
-
-_Retrieve products information using bulk update. product should be under this store_
-
-```javascript
-mp.updateBulkProduct(data);
-```
-
-| Params | Type     | Description |
-| ------ | -------- | ----------- |
-| `data` | `object` | ```JSON     |
-
-{"productInstances": [{"sku": "T2BKO3966-KS","externalUrl": "http://test.t","externalId": "22825","variations": [{"sku": "newtest-1","externalId": "525827"},{"sku": "newtest-2","externalId": "525828"}]}]}
-
-````|
-
-<small>https://knawat-mp.restlet.io/#operation_bulk_update_products</small>
-
-### deleteProductBySku
-
-_Delete Product by Product SKU from store._
-
-```javascript
-mp.deleteProductBySku(products);
-````
-
-<small>https://knawat-mp.restlet.io/#operation_delete_product_by_sku</small>
-
-### updateProductBySku
-
-_Update imported product External IDs by SKU_
-
-```javascript
-mp.updateProductBySku(products);
-```
-
-| Option | Type     | Required | Description            |
-| ------ | -------- | -------- | ---------------------- |
-| `data` | `object` | yes      | Check mp documentation |
-
-<small>https://knawat-mp.restlet.io/#operation_update_product</small>
-
-### getCategories
-
-_Get all categories related to my products._
-
-```javascript
-mp.getCategories();
-```
-
-<small>https://knawat-mp.restlet.io/#operation_get_list_of_categories</small>
-
-## Order Methods
-
-### getOrders (GET Orders)
-
-```javascript
-mp.getOrders(limit, page);
-```
-
-| Params  | Type     | Description                                  |
-| ------- | -------- | -------------------------------------------- |
-| `limit` | `Number` | Number of orders to retrieve. `Default: 1`   |
-| `page`  | `Number` | Number of the page to retrieve. `Default: 1` |
-
-### getOrderById (GET Order By Knawat Order Id)
-
-```javascript
-mp.getOrderById(order_id);
-```
-
-| Params     | Type     | Description     |
-| ---------- | -------- | --------------- |
-| `order_id` | `string` | Knawat Order ID |
-
-### createOrder (Create Order)
-
-```javascript
-mp.createOrder(order_data);
-```
-
-| Params       | Type     | Description                          |
-| ------------ | -------- | ------------------------------------ |
-| `order_data` | `object` | Array of Order Data for create order |
-
-### updateOrder (Update Order)
-
-```javascript
-mp.updateOrder(order_id, order_data);
-```
-
-| Params       | Type     | Description                                  |
-| ------------ | -------- | -------------------------------------------- |
-| `order_id`   | `string` | Knawat Order ID                              |
-| `order_data` | `object` | Array of Updated Order Data for create order |
+* My Products
+  * [__getProducts([params])__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get)
+  * [__addProducts(products)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/post)
+  * [__updateBulkProduct(data)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/patch)
+  * [__getMyProductsCount(params)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1count/get)
+  * [__getMyProductBySku(id, [params])__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get)
+  * [__updateProductBySku(id, product)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/put)
+  * [__deleteProductBySku(id)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/delete)
+* Orders
+  * [__getOrders([params])__](https://docs.knawat.io/#tag/Orders/paths/~1orders/get)
+  * [__getOrderById(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/get)
+  * [__getOrderWarnings(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}~1warnings/get)
+  * [__cancelOrder(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/delete)
+  * [__payOrder(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1pay~1{order_id}/put)
+  * [__createOrder(order)__](https://docs.knawat.io/#tag/Orders/paths/~1orders/post)
+  * [__updateOrder(id, order)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/put)
+* Invoices
+  * [__getInvoices([params])__](https://docs.knawat.io/#tag/Invoices/paths/~1invoices/get)
+  * [__applyCreditsToInvoice(id, data)__](https://docs.knawat.io/#tag/Invoices/paths/~1invoices~1{id}~1credits/post)
+* Categories
+  * __getAllCategories()__
+  * __getCategories([params])__
+* Payments
+  * __addPayment(storeId, payment)__`[Basic]`
+  * [__listPayments([params])__](https://docs.knawat.io/#tag/Payments/paths/~1payments/get)
+* Logs `[Basic]`
+  * __getStoreLogs([params])__
+  * [__createStoreLogs(log)__](https://docs.knawat.io/#tag/Logs/paths/~1logs/post) `[Basic|Bearer]`
+* Products `[Basic]`
+  * __getProductsByVariationSku(sku)__
+  * __getProductBySku(sku[, params])__
+* Stores `[Basic]`
+  * __listStores([params])__
+  * __createStore(store)__
+  * __updateStore(id, store)__
+  * __getStoreByURL(storeId[, params])__
+  * __getStoresByUser(userEmail[, limit])__
+* Shipping `[Basic]`
+  * __getShippingRules(country, weight, price)__
+  * __getShippingCouriers()__
+  * __getAllShipmentPolicies()__
+  * __createShipmentPolicy(shipment)__
+  * __getShipmentPolicyById(id)__
+  * __updateShipmentPolicy(id, shipment)__
+* Subscriptions `[Basic]`
+  * __listSubscriptions([params])__
+  * __addSubscription(subscription)__
+  * __cancelSubscription(id)__
+  * __updateSubscription(id, subscription)__
+* Memberships `[Basic]`
+  * __listMemberships()__
+  * __getMembershipById(id[, params])__
+  * __createMembership(membership)__
+  * __updateMembership(id, membership)__
+* Coupons `[Basic]`
+  * __listCoupons([params])__
+  * __getCoupon(id[, params])__
+  * __createCoupon(coupon)__
+  * __updateCoupon(id coupon)__
+* Taxes `[Basic]`
+  * __getTaxRecords([params])__
+  * __createTaxRecord(tax)__
+  * __updateTaxRecord(id, tax)__
+  * __getTaxById(id)__
+  * __deleteTaxRecord(id)__
 
 ## REST Methods
 

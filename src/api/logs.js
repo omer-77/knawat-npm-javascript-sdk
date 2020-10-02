@@ -4,7 +4,6 @@ export default {
    *
    * @param {object} params
    * @returns
-   * @see http://docs.knawat.io/#tag/Enterprise-Only/paths/~1logs/get
    */
   getStoreLogs(queryParams) {
     return this.$fetch('GET', '/logs', { auth: 'basic', queryParams });
@@ -22,7 +21,6 @@ export default {
    *     payload  Object = {},
    *   }
    * @returns
-   * @see http://docs.knawat.io/#tag/Enterprise-Only/paths/~1logs/post
    */
   createStoreLogs({
     storeId,
