@@ -66,6 +66,30 @@ const mp = new MP({
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
+
+## SDK Methods
+
+### $Fetch
+
+An Async function that requests Data from server. 
+
+| Params    | Type     | Description                                                                  |
+| --------- | -------- | ---------------------------------------------------------------------------- |
+| `Method`  | `string` | HTTP Methods for RESTful Services (Get, Put, Post, Patch, Delete)            |
+| `Path`    | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
+| `options` | `Object` | options { queryParams, auth, body, headers }                                 |
+
+```javascript
+mp.$fetch(method, path,options={});
+```
+
+Example: 
+```javascript
+mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : count and categories array
+
+```
+
+
 ## Available resources and methods
 
 * My Products
@@ -134,18 +158,6 @@ const mp = new MP({
   * __getTaxById(id)__
   * __deleteTaxRecord(id)__
 
-## REST Methods
-
-| Params     | Type     | Description                                                                  |
-| ---------- | -------- | ---------------------------------------------------------------------------- |
-| `endpoint` | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
-| `data`     | `array`  | Only for POST and PUT, data that will be converted to JSON                   |
-
-### Request
-
-```javascript
-mp.$fetch(method, endpoint);
-```
 
 ## Reporting Security Issues
 
