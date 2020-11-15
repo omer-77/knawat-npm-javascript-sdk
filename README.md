@@ -89,6 +89,15 @@ mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : 
 
 ```
 
+## postman 
+
+If you want to test the API on the postman you can get the bearer token by using this following mettohds: 
+
+```javascript
+ mp.getTokenAuth() // Async function
+ mp.getToeknAuth().then(console.log)
+```
+After that you can use the available resource to test and see the results you got!.
 
 ## Available resources and methods
 
