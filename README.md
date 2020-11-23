@@ -67,39 +67,18 @@ const mp = new MP({
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
 
-## SDK Methods
+## Library Methods
 
-### $Fetch
 
-An Async function that requests Data from server. 
+### Products Functions
 
-| Params    | Type     | Description                                                                  |
-| --------- | -------- | ---------------------------------------------------------------------------- |
-| `Method`  | `string` | HTTP Methods for RESTful Services (Get, Put, Post, Patch, Delete)            |
-| `Path`    | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
-| `options` | `Object` | options { queryParams, auth, body, headers }                                 |
+All the functions mentioned here return a promise and it's an async function.
+What's mentioned between `[brackets]` are the authentication method used for the functions.
 
-```javascript
-mp.$fetch(method, path,options={});
+Example 
+```JavaScript
+mp.getProducts() // return a promise.
 ```
-
-Example: 
-```javascript
-mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : count and categories array
-
-```
-
-## postman 
-
-If you want to test the API on the postman you can get the bearer token by using this following mettohds: 
-
-```javascript
- mp.getTokenAuth() // Async function
- mp.getToeknAuth().then(console.log)
-```
-After that you can use the available resource to test and see the results you got!.
-
-## Available resources and methods
 
 * My Products
   * [__getProducts([params])__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get)
@@ -166,6 +145,38 @@ After that you can use the available resource to test and see the results you go
   * __updateTaxRecord(id, tax)__
   * __getTaxById(id)__
   * __deleteTaxRecord(id)__
+
+
+### REST Function
+
+This function is used internally as a warpper for the library.
+An Async function that requests Data from server. 
+
+| Params    | Type     | Description                                                                  |
+| --------- | -------- | ---------------------------------------------------------------------------- |
+| `Method`  | `string` | HTTP Methods for RESTful Services (Get, Put, Post, Patch, Delete)            |
+| `Path`    | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
+| `options` | `Object` | options { queryParams, auth, body, headers }                                 |
+
+```javascript
+mp.$fetch(method, path,options={});
+```
+
+Example: 
+```javascript
+mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : count and categories array
+
+```
+
+## postman 
+
+If you want to test the API on the postman you can get the bearer token by using this following mettohds: 
+
+```javascript
+ mp.getTokenAuth() // Async function
+ mp.getToeknAuth().then(console.log)
+```
+After that you can use the available resource to test and see the results you got!.
 
 
 ## Reporting Security Issues
