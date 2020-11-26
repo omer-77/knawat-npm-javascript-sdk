@@ -48,8 +48,8 @@ export default {
    * @see https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1count/get
    * @memberof MP
    */
-  getMyProductsCount() {
-    return this.$fetch('GET', '/catalog/products/count', { auth: 'token' });
+  getMyProductsCount(queryParams) {
+    return this.$fetch('GET', '/catalog/products/count', { auth: 'token', queryParams });
   },
 
   /**
