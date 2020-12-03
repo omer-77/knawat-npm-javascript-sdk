@@ -1,8 +1,16 @@
 import fetch from 'node-fetch';
 import qs from 'qs';
+import stopcock from 'stopcock';
 
 class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
+
+  static stopcockRequest = stopcock(fetch, {
+    bucketSize: process.env.STOPCOCK_BUCKET_SIZE || 120,
+    interval: process.env.STOPCOCK_INTERVAL || 60000,
+    limit: process.env.STOPCOCK_LIMIT || 2,
+  });
+
   headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -56,7 +64,7 @@ class KnawatMP {
       const storeDoc = await this.$fetch('GET', `/stores/${storeEncoded}`, {
         auth: 'basic',
         queryParams: { withoutBalance: 1 },
-      }).catch(e => {
+      }).catch((e) => {
         throw e;
       });
 
@@ -132,15 +140,18 @@ class KnawatMP {
     if (options.queryParams) {
       requestUrl += `?${qs.stringify(options.queryParams, { arrayFormat: 'brackets' })}`;
     }
-    return fetch(requestUrl, {
+
+    return KnawatMP.stopcockRequest(requestUrl, {
       method: method,
       headers: this.headers,
       ...options,
     }).then(async (res) => {
       const jsonRes = await res.json();
+
       if (res.ok) {
         return jsonRes;
       }
+
       throw {
         statusCode: res.status,
         path,
