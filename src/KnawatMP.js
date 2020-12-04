@@ -6,8 +6,8 @@ class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
 
   static stopcockRequest = stopcock(fetch, {
-    bucketSize: process.env.STOPCOCK_BUCKET_SIZE || 120,
-    interval: process.env.STOPCOCK_INTERVAL || 60000,
+    bucketSize: process.env.STOPCOCK_BUCKET_SIZE || 2,
+    interval: process.env.STOPCOCK_INTERVAL || 2000,
     limit: process.env.STOPCOCK_LIMIT || 2,
   });
 
