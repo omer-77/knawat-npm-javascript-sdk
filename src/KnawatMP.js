@@ -7,7 +7,7 @@ class KnawatMP {
 
   static stopcockRequest = stopcock(fetch, {
     bucketSize: process.env.STOPCOCK_BUCKET_SIZE || 2,
-    interval: process.env.STOPCOCK_INTERVAL || 2000,
+    interval: process.env.STOPCOCK_INTERVAL || 1000,
     limit: process.env.STOPCOCK_LIMIT || 2,
   });
 
