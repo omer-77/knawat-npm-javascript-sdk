@@ -5,11 +5,7 @@ import stopcock from 'stopcock';
 class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
 
-  static stopcockRequest = stopcock(fetch, {
-    bucketSize: process.env.STOPCOCK_BUCKET_SIZE || 2,
-    interval: process.env.STOPCOCK_INTERVAL || 1000,
-    limit: process.env.STOPCOCK_LIMIT || 1,
-  });
+  static stopcockRequest = fetch;
 
   headers = {
     Accept: 'application/json',
@@ -28,10 +24,11 @@ class KnawatMP {
    * KnawatMP sdk constructor
    * @param {*} param0 {key: string|null, secret: string|null, store: string|null}
    */
-  constructor({ key, secret, store } = {}) {
+  constructor({ key, secret, store, autoLimit } = {}) {
     this.key = key;
     this.secret = secret;
     this.store = store;
+    this.autoLimit = autoLimit;
 
     // For backward compatibility
     this.consumerKey = key;
@@ -54,6 +51,13 @@ class KnawatMP {
    * Get the current store credentials
    */
   async setCurrentStoreCredentials() {
+    if (this.autoLimit) {
+      KnawatMP.stopcockRequest = stopcock(fetch, {
+        bucketSize: this.autoLimit.bucketSize || 2,
+        interval: this.autoLimit.interval || 1000,
+        limit: this.autoLimit.limit || 1,
+      });
+    }
     // Return the current key and secret
     if (this.key && this.secret) return;
     if (this.consumerKey && this.consumerSecret) return;

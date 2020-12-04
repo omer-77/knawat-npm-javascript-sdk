@@ -44,15 +44,46 @@ Setup for the new Knawat Dropshipping REST API integration:
 const MP = require('@knawat/mp');
 
 // Provide instance with your store credentials
+// If want to use the stopcock the pass the autoLimit object
 const mp = new MP({
   key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
   secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
 });
 
 // Or use your store id/URL
 // Supported using basic auth only
+// If want to use the stopcock the pass the autoLimit object
 const mp = new MP({
   store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
+});
+
+// Provide instance with your store credentials and autoLimit object if want to enable the Rate Limit
+const mp = new MP({
+  key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
+});
+
+// If don't want to enabled the Rate Limit Feature then pass the autoLimit False
+const mp = new MP({
+  key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: false,
+});
+
+// Or use your store id/URL and pass autoLimit object if want to enable the RateLimit
+// Supported using basic auth only
+const mp = new MP({
+  store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
+});
+
+// If don't want to enabled the Rate Limit Feature then pass the autoLimit False
+const mp = new MP({
+  store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+  autoLimit: false,
 });
 ```
 
