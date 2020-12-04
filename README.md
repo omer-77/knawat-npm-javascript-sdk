@@ -59,31 +59,18 @@ const mp = new MP({
   autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
 });
 
-// Provide instance with your store credentials and autoLimit object if want to enable the Rate Limit
+// Provide instance with your store credentials and autoLimit object if want to enable the Rate Limit or pass false if not want to enable the autoLimit
 const mp = new MP({
   key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
   secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
-  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
+  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 } | false,
 });
 
-// If don't want to enabled the Rate Limit Feature then pass the autoLimit False
-const mp = new MP({
-  key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  secret: 'XXXXXXXXXXXXXXXXXXXXXXXX',
-  autoLimit: false,
-});
-
-// Or use your store id/URL and pass autoLimit object if want to enable the RateLimit
+// Or use your store id/URL and pass autoLimit object if want to enable the RateLimit or pass false if not want to enable the autoLimit
 // Supported using basic auth only
 const mp = new MP({
   store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  autoLimit: { bucketSize: 2, interval: 1000, limit: 1 },
-});
-
-// If don't want to enabled the Rate Limit Feature then pass the autoLimit False
-const mp = new MP({
-  store: 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
-  autoLimit: false,
+  autoLimit: { bucketSize: 2, interval: 1000 } | false,
 });
 ```
 
