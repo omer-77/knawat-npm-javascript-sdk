@@ -28,7 +28,7 @@ class KnawatMP {
     this.key = key;
     this.secret = secret;
     this.store = store;
-    this.autoLimit = autoLimit;
+    this.autoLimit = autoLimit || {};
 
     // For backward compatibility
     this.consumerKey = key;
@@ -53,9 +53,9 @@ class KnawatMP {
   async setCurrentStoreCredentials() {
     if (this.autoLimit) {
       KnawatMP.stopcockRequest = stopcock(fetch, {
-        bucketSize: this.autoLimit.bucketSize || 2,
+        bucketSize: this.autoLimit.bucketSize || 35,
         interval: this.autoLimit.interval || 1000,
-        limit: this.autoLimit.limit || 1,
+        limit: this.autoLimit.limit || 2,
       });
     }
     // Return the current key and secret
