@@ -14,11 +14,14 @@ test('Get Products', () => {
   });
 });
 
-test('Get Product By Sku', () => {
-  return mp.getProductBySku(products[2].sku).then((res) => {
-    expect(res.sku).toEqual(products[2].sku);
+// If we have basic keys
+if (process.env.KNAWAT_PASS) {
+  test('Get Product By Sku', () => {
+    return mp.getProductBySku(products[2].sku).then((res) => {
+      expect(res.sku).toEqual(products[2].sku);
+    });
   });
-});
+}
 
 test('Import products', () => {
   return mp.addProducts(products).then((res) => {
