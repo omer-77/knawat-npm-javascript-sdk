@@ -11,11 +11,11 @@ test(`Throttling ${callsToTest} requests in ${
 }+ seconds`, async (done) => {
   // call endpoint x times, expect to be finish in x / 2 since we have 2 requests per second
   const startDate = new Date();
-  return Promise.allSettled(
-    [...Array(callsToTest).keys()].map(() => mp.getProducts())
-  ).then(() => {
-    expect((new Date() - startDate) / 1000).toBeGreaterThanOrEqual(callsToTest / 2 - 3);
+  return Promise.all([...Array(callsToTest).keys()].map(() => mp.getProducts())).then(
+    () => {
+      expect((new Date() - startDate) / 1000).toBeGreaterThanOrEqual(callsToTest / 2 - 3);
 
-    done();
-  });
+      done();
+    }
+  );
 });
