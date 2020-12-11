@@ -32,14 +32,14 @@ test('Import products', () => {
 test('Update product instance', () => {
   return mp
     .updateProductBySku(products[0].sku, {
-      externalId: 3081359687744,
+      externalId: Math.random().toString().slice(2, 11),
       variations: [
         {
-          externalId: 26034301468736,
+          externalId: Math.random().toString().slice(2, 11),
           sku: 'M3DMGSO22049-PNK',
         },
         {
-          externalId: 26034301501504,
+          externalId: Math.random().toString().slice(2, 11),
           sku: 'M3DMGSO22049-PNK',
         },
       ],
