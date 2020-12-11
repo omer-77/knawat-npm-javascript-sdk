@@ -32,7 +32,7 @@ class KnawatMP {
     this.consumerSecret = secret;
 
     this.fetch = stopcock(this.$fetchRateFree, {
-      bucketSize: apiRateLimit.bucketSize || 35,
+      bucketSize: apiRateLimit.bucketSize || 10,
       interval: apiRateLimit.interval || 1000,
       limit: apiRateLimit.limit || 2,
     });

@@ -5,18 +5,17 @@ import mp from './setup';
  */
 
 const callsToTest = 30;
+const bucketSize = 10;
+const seconds = (callsToTest - bucketSize) / 2;
 jest.setTimeout(callsToTest * 1000);
-test(`Throttling ${callsToTest} requests in ${
-  callsToTest / 2 - 1
-}+ seconds`, async (done) => {
+test(`Throttling ${callsToTest} requests in ${seconds}+ seconds`, async (done) => {
   // call endpoint x times, expect to be finish in x / 2 since we have 2 requests per second
   const startDate = new Date();
   return mp
     .refreshToken()
     .then(() => Promise.all([...Array(callsToTest).keys()].map(() => mp.getProducts())))
     .then(() => {
-      expect((new Date() - startDate) / 1000).toBeGreaterThanOrEqual(callsToTest / 2 - 1);
-
+      expect((new Date() - startDate) / 1000).toBeGreaterThanOrEqual(seconds);
       done();
     });
 });
