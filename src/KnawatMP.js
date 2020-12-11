@@ -1,8 +1,10 @@
 import fetch from 'node-fetch';
 import qs from 'qs';
+import stopcock from 'stopcock';
 
 class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
+
   headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -20,7 +22,7 @@ class KnawatMP {
    * KnawatMP sdk constructor
    * @param {*} param0 {key: string|null, secret: string|null, store: string|null}
    */
-  constructor({ key, secret, store } = {}) {
+  constructor({ key, secret, store, apiRateLimit = {} } = {}) {
     this.key = key;
     this.secret = secret;
     this.store = store;
@@ -28,6 +30,12 @@ class KnawatMP {
     // For backward compatibility
     this.consumerKey = key;
     this.consumerSecret = secret;
+
+    this.fetch = stopcock(this.$fetchRateFree, {
+      bucketSize: apiRateLimit.bucketSize || 10,
+      interval: apiRateLimit.interval || 1000,
+      limit: apiRateLimit.limit || 2,
+    });
   }
 
   /**
@@ -56,7 +64,7 @@ class KnawatMP {
       const storeDoc = await this.$fetch('GET', `/stores/${storeEncoded}`, {
         auth: 'basic',
         queryParams: { withoutBalance: 1 },
-      }).catch(e => {
+      }).catch((e) => {
         throw e;
       });
 
@@ -119,6 +127,19 @@ class KnawatMP {
   }
 
   /**
+   * Throttled fetch
+   *
+   * @param {*} method
+   * @param {*} path
+   * @param {*} [options={}]
+   * @returns
+   * @memberof KnawatMP
+   */
+  async $fetch(method, path, options = {}) {
+    return this.fetch(method, path, options);
+  }
+
+  /**
    * Fetch data from server
    *
    * @param {string} method
@@ -126,12 +147,13 @@ class KnawatMP {
    * @param {object} options { queryParams, auth, body, headers }
    * @memberof Fetch
    */
-  async $fetch(method, path, options = {}) {
+  async $fetchRateFree(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
     let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
       requestUrl += `?${qs.stringify(options.queryParams, { arrayFormat: 'brackets' })}`;
     }
+
     return fetch(requestUrl, {
       method: method,
       headers: this.headers,

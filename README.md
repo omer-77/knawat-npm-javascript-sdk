@@ -22,7 +22,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/57a87a5472f643a0b8b4a920075baa5b)](https://app.codacy.com/app/Knawat/Knawat-NPM-JavaScript-SDK?utm_source=github.com&utm_medium=referral&utm_content=Knawat/Knawat-NPM-JavaScript-SDK&utm_campaign=Badge_Grade_Settings)
 
-A Node.js package for Knawat Dropshipping MP REST API. Easily interact with the Knawat MP REST API using this library.
+A Node.js package for Knawat Dropshipping Merchants REST API. Easily interact with the Knawat MP REST API using this library.
 
 ## Installation
 
@@ -58,81 +58,82 @@ const mp = new MP({
 
 ### Options
 
-| Option   | Type     | Required    | Description                                                                   |
-| -------- | -------- | ----------- | ----------------------------------------------------------------------------- |
-| `key`    | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
-| `secret` | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
-| `store`  | `string` | conditional | Your store current store URL                                                  |
+| Option         | Type     | Required    | Description                                                                   |
+| -------------- | -------- | ----------- | ----------------------------------------------------------------------------- |
+| `key`          | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
+| `secret`       | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
+| `store`        | `string` | conditional | Your store current store URL                                                  |
+| `apiRateLimit` | `object` | optional    | Overwrite the API rate limit (not recommended)                                |
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
 ## Available resources and methods
 
-* My Products
-  * [__getProducts([params])__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get)
-  * [__addProducts(products)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/post)
-  * [__updateBulkProduct(data)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/patch)
-  * [__getMyProductsCount(params)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1count/get)
-  * [__getMyProductBySku(id, [params])__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get)
-  * [__updateProductBySku(id, product)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/put)
-  * [__deleteProductBySku(id)__](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/delete)
-* Orders
-  * [__getOrders([params])__](https://docs.knawat.io/#tag/Orders/paths/~1orders/get)
-  * [__getOrderById(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/get)
-  * [__getOrderWarnings(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}~1warnings/get)
-  * [__cancelOrder(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/delete)
-  * [__payOrder(id)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1pay~1{order_id}/put)
-  * [__createOrder(order)__](https://docs.knawat.io/#tag/Orders/paths/~1orders/post)
-  * [__updateOrder(id, order)__](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/put)
-* Invoices
-  * [__getInvoices([params])__](https://docs.knawat.io/#tag/Invoices/paths/~1invoices/get)
-  * [__applyCreditsToInvoice(id, data)__](https://docs.knawat.io/#tag/Invoices/paths/~1invoices~1{id}~1credits/post)
-* Categories
-  * __getAllCategories()__
-  * __getCategories([params])__
-* Payments
-  * __addPayment(storeId, payment)__`[Basic]`
-  * [__listPayments([params])__](https://docs.knawat.io/#tag/Payments/paths/~1payments/get)
-* Logs `[Basic]`
-  * __getStoreLogs([params])__
-  * [__createStoreLogs(log)__](https://docs.knawat.io/#tag/Logs/paths/~1logs/post) `[Basic|Bearer]`
-* Products `[Basic]`
-  * __getProductsByVariationSku(sku)__
-  * __getProductBySku(sku[, params])__
-* Stores `[Basic]`
-  * __listStores([params])__
-  * __createStore(store)__
-  * __updateStore(id, store)__
-  * __getStoreByURL(storeId[, params])__
-  * __getStoresByUser(userEmail[, limit])__
-* Shipping `[Basic]`
-  * __getShippingRules(country, weight, price)__
-  * __getShippingCouriers()__
-  * __getAllShipmentPolicies()__
-  * __createShipmentPolicy(shipment)__
-  * __getShipmentPolicyById(id)__
-  * __updateShipmentPolicy(id, shipment)__
-* Subscriptions `[Basic]`
-  * __listSubscriptions([params])__
-  * __addSubscription(subscription)__
-  * __cancelSubscription(id)__
-  * __updateSubscription(id, subscription)__
-* Memberships `[Basic]`
-  * __listMemberships()__
-  * __getMembershipById(id[, params])__
-  * __createMembership(membership)__
-  * __updateMembership(id, membership)__
-* Coupons `[Basic]`
-  * __listCoupons([params])__
-  * __getCoupon(id[, params])__
-  * __createCoupon(coupon)__
-  * __updateCoupon(id coupon)__
-* Taxes `[Basic]`
-  * __getTaxRecords([params])__
-  * __createTaxRecord(tax)__
-  * __updateTaxRecord(id, tax)__
-  * __getTaxById(id)__
-  * __deleteTaxRecord(id)__
+- My Products
+  - [**getProducts([params])**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get)
+  - [**addProducts(products)**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/post)
+  - [**updateBulkProduct(data)**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/patch)
+  - [**getMyProductsCount(params)**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1count/get)
+  - [**getMyProductBySku(id, [params])**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/get)
+  - [**updateProductBySku(id, product)**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/put)
+  - [**deleteProductBySku(id)**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products~1{sku}/delete)
+- Orders
+  - [**getOrders([params])**](https://docs.knawat.io/#tag/Orders/paths/~1orders/get)
+  - [**getOrderById(id)**](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/get)
+  - [**getOrderWarnings(id)**](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}~1warnings/get)
+  - [**cancelOrder(id)**](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/delete)
+  - [**payOrder(id)**](https://docs.knawat.io/#tag/Orders/paths/~1orders~1pay~1{order_id}/put)
+  - [**createOrder(order)**](https://docs.knawat.io/#tag/Orders/paths/~1orders/post)
+  - [**updateOrder(id, order)**](https://docs.knawat.io/#tag/Orders/paths/~1orders~1{order_id}/put)
+- Invoices
+  - [**getInvoices([params])**](https://docs.knawat.io/#tag/Invoices/paths/~1invoices/get)
+  - [**applyCreditsToInvoice(id, data)**](https://docs.knawat.io/#tag/Invoices/paths/~1invoices~1{id}~1credits/post)
+- Categories
+  - **getAllCategories()**
+  - **getCategories([params])**
+- Payments
+  - **addPayment(storeId, payment)**`[Basic]`
+  - [**listPayments([params])**](https://docs.knawat.io/#tag/Payments/paths/~1payments/get)
+- Logs `[Basic]`
+  - **getStoreLogs([params])**
+  - [**createStoreLogs(log)**](https://docs.knawat.io/#tag/Logs/paths/~1logs/post) `[Basic|Bearer]`
+- Products `[Basic]`
+  - **getProductsByVariationSku(sku)**
+  - **getProductBySku(sku[, params])**
+- Stores `[Basic]`
+  - **listStores([params])**
+  - **createStore(store)**
+  - **updateStore(id, store)**
+  - **getStoreByURL(storeId[, params])**
+  - **getStoresByUser(userEmail[, limit])**
+- Shipping `[Basic]`
+  - **getShippingRules(country, weight, price)**
+  - **getShippingCouriers()**
+  - **getAllShipmentPolicies()**
+  - **createShipmentPolicy(shipment)**
+  - **getShipmentPolicyById(id)**
+  - **updateShipmentPolicy(id, shipment)**
+- Subscriptions `[Basic]`
+  - **listSubscriptions([params])**
+  - **addSubscription(subscription)**
+  - **cancelSubscription(id)**
+  - **updateSubscription(id, subscription)**
+- Memberships `[Basic]`
+  - **listMemberships()**
+  - **getMembershipById(id[, params])**
+  - **createMembership(membership)**
+  - **updateMembership(id, membership)**
+- Coupons `[Basic]`
+  - **listCoupons([params])**
+  - **getCoupon(id[, params])**
+  - **createCoupon(coupon)**
+  - **updateCoupon(id coupon)**
+- Taxes `[Basic]`
+  - **getTaxRecords([params])**
+  - **createTaxRecord(tax)**
+  - **updateTaxRecord(id, tax)**
+  - **getTaxById(id)**
+  - **deleteTaxRecord(id)**
 
 ## REST Methods
 

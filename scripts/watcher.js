@@ -9,9 +9,9 @@ bs.init({
     paths.dist,
     {
       match: paths.src,
-      fn(event, file) {
+      fn() {
         build('umd');
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
