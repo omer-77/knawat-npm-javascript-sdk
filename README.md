@@ -58,12 +58,12 @@ const mp = new MP({
 
 ### Options
 
-| Option      | Type     | Required    | Description                                                                   |
-| ----------- | -------- | ----------- | ----------------------------------------------------------------------------- |
-| `key`       | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
-| `secret`    | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
-| `store`     | `string` | conditional | Your store current store URL                                                  |
-| `autoLimit` | `object` | optional    | Overwrite the API rate limit (not recommended)                                |
+| Option         | Type     | Required    | Description                                                                   |
+| -------------- | -------- | ----------- | ----------------------------------------------------------------------------- |
+| `key`          | `string` | conditional | Your Store's API consumer key if token not provided this field is required    |
+| `secret`       | `string` | conditional | Your Store's API consumer secret if token not provided this field is required |
+| `store`        | `string` | conditional | Your store current store URL                                                  |
+| `apiRateLimit` | `object` | optional    | Overwrite the API rate limit (not recommended)                                |
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 

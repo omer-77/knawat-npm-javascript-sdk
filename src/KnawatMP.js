@@ -5,8 +5,6 @@ import stopcock from 'stopcock';
 class KnawatMP {
   static baseUrl = process.env.KNAWAT_MP_BASE_URL || 'https://mp.knawat.io/api';
 
-  static stopcockRequest = fetch;
-
   headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -24,15 +22,20 @@ class KnawatMP {
    * KnawatMP sdk constructor
    * @param {*} param0 {key: string|null, secret: string|null, store: string|null}
    */
-  constructor({ key, secret, store, autoLimit } = {}) {
+  constructor({ key, secret, store, apiRateLimit = {} } = {}) {
     this.key = key;
     this.secret = secret;
     this.store = store;
-    this.autoLimit = autoLimit || {};
 
     // For backward compatibility
     this.consumerKey = key;
     this.consumerSecret = secret;
+
+    this.fetch = stopcock(this.$fetchRateFree, {
+      bucketSize: apiRateLimit.bucketSize || 35,
+      interval: apiRateLimit.interval || 1000,
+      limit: apiRateLimit.limit || 2,
+    });
   }
 
   /**
@@ -51,13 +54,6 @@ class KnawatMP {
    * Get the current store credentials
    */
   async setCurrentStoreCredentials() {
-    if (this.autoLimit) {
-      KnawatMP.stopcockRequest = stopcock(fetch, {
-        bucketSize: this.autoLimit.bucketSize || 35,
-        interval: this.autoLimit.interval || 1000,
-        limit: this.autoLimit.limit || 2,
-      });
-    }
     // Return the current key and secret
     if (this.key && this.secret) return;
     if (this.consumerKey && this.consumerSecret) return;
@@ -131,6 +127,19 @@ class KnawatMP {
   }
 
   /**
+   * Throttled fetch
+   *
+   * @param {*} method
+   * @param {*} path
+   * @param {*} [options={}]
+   * @returns
+   * @memberof KnawatMP
+   */
+  async $fetch(method, path, options = {}) {
+    return this.fetch(method, path, options);
+  }
+
+  /**
    * Fetch data from server
    *
    * @param {string} method
@@ -138,24 +147,22 @@ class KnawatMP {
    * @param {object} options { queryParams, auth, body, headers }
    * @memberof Fetch
    */
-  async $fetch(method, path, options = {}) {
+  async $fetchRateFree(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
     let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
       requestUrl += `?${qs.stringify(options.queryParams, { arrayFormat: 'brackets' })}`;
     }
 
-    return KnawatMP.stopcockRequest(requestUrl, {
+    return fetch(requestUrl, {
       method: method,
       headers: this.headers,
       ...options,
     }).then(async (res) => {
       const jsonRes = await res.json();
-
       if (res.ok) {
         return jsonRes;
       }
-
       throw {
         statusCode: res.status,
         path,
