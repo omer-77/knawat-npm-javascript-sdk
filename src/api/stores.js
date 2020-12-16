@@ -4,7 +4,7 @@ export default {
    * @param {Object} queryParams search query params
    */
   listStores(queryParams) {
-    return this.$fetch('GET', `/admin/stores`, {
+    return this.$fetch('GET', `/stores/admin`, {
       queryParams,
       auth: 'basic',
     });
