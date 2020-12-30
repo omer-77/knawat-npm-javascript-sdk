@@ -4,7 +4,7 @@ export default {
    * @param {Object} queryParams search query params
    */
   listStores(queryParams) {
-    return this.$fetch('GET', `/stores/admin`, {
+    return this.$fetch('GET', `/stores`, {
       queryParams,
       auth: 'basic',
     });
@@ -56,7 +56,7 @@ export default {
       },
       limit,
     });
-    return this.$fetch('GET', '/stores', { auth: 'basic', queryParams: { filter } });
+    return this.listStores({ filter });
   },
 
   /**
