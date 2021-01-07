@@ -4,7 +4,7 @@ export default {
    * @param {Object} queryParams search query params
    */
   listStores(queryParams) {
-    return this.$fetch('GET', `/stores/admin`, {
+    return this.$fetch('GET', `/stores`, {
       queryParams,
       auth: 'basic',
     });
@@ -51,12 +51,9 @@ export default {
    */
   getStoresByUser(user, limit = 100) {
     const filter = JSON.stringify({
-      where: {
-        'users.email': user.toLowerCase(),
-      },
-      limit,
+      where: { 'users.email': user.toLowerCase() },
     });
-    return this.$fetch('GET', '/stores', { auth: 'basic', queryParams: { filter } });
+    return this.listStores({ filter, limit });
   },
 
   /**
