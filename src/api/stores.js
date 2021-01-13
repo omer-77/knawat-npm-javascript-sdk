@@ -51,7 +51,7 @@ export default {
    */
   getStoresByUser(user, limit = 100) {
     const filter = JSON.stringify({
-      where: { 'users.email': user.toLowerCase() },
+      query: { 'users.email': user.toLowerCase() },
     });
     return this.listStores({ filter, limit });
   },
