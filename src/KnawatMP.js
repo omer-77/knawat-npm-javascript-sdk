@@ -31,7 +31,7 @@ class KnawatMP {
     this.consumerKey = key;
     this.consumerSecret = secret;
 
-    this.fetch = stopcock(this.$fetchRateFree, {
+    this.__fetchThrottled = stopcock(this.__fetch, {
       bucketSize: apiRateLimit.bucketSize || 10,
       interval: apiRateLimit.interval || 1000,
       limit: apiRateLimit.limit || 2,
@@ -127,7 +127,7 @@ class KnawatMP {
   }
 
   /**
-   * Throttled fetch
+   * fetch data
    *
    * @param {*} method
    * @param {*} path
@@ -136,7 +136,8 @@ class KnawatMP {
    * @memberof KnawatMP
    */
   async $fetch(method, path, options = {}) {
-    return this.fetch(method, path, options);
+    if (options.auth === 'token') return this.__fetchThrottled(method, path, options);
+    return this.__fetch(method, path, options);
   }
 
   /**
@@ -147,7 +148,7 @@ class KnawatMP {
    * @param {object} options { queryParams, auth, body, headers }
    * @memberof Fetch
    */
-  async $fetchRateFree(method, path, options = {}) {
+  async __fetch(method, path, options = {}) {
     await this.setAuthHeaders(options.auth);
     let requestUrl = `${KnawatMP.baseUrl}${path}`;
     if (options.queryParams) {
@@ -169,6 +170,14 @@ class KnawatMP {
         ...jsonRes,
       };
     });
+  }
+
+  /**
+   * For backward compitiblity
+   * @param  {...any} args
+   */
+  $fetchRateFree(...args) {
+    return this.__fetch(...args);
   }
 }
 
