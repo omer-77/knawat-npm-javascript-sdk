@@ -16,17 +16,14 @@
     "deploy:patch": "bash scripts/release.sh patch",
     "deploy:minor": "bash scripts/release.sh minor"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Knawat/Knawat-NPM-JavaScript-SDK.git"
-  },
+  "repository": "github:knawat/Knawat-NPM-JavaScript-SDK",
   "keywords": [
     "dropshipping",
     "knawat",
     "ecommerce"
   ],
-  "author": "Knawat LLC",
-  "license": "MIT",
+  "author": "Knawat, Inc.",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
     "url": "https://github.com/Knawat/Knawat-NPM-JavaScript-SDK/issues"
   },
