@@ -67,7 +67,19 @@ const mp = new MP({
 
 <small>https://knawat-mp.restlet.io/#operation_get_token</small>
 
-## Available resources and methods
+
+## Library Methods
+
+
+### Products Functions
+
+All the functions mentioned here return a promise and it's an async function.
+What's mentioned between `[brackets]` are the authentication method used for the functions.
+
+Example 
+```JavaScript
+mp.getProducts() // return a promise.
+```
 
 - My Products
   - [**getProducts([params])**](https://docs.knawat.io/#tag/My-Products/paths/~1catalog~1products/get)
@@ -135,18 +147,38 @@ const mp = new MP({
   - **getTaxById(id)**
   - **deleteTaxRecord(id)**
 
-## REST Methods
 
-| Params     | Type     | Description                                                                  |
-| ---------- | -------- | ---------------------------------------------------------------------------- |
-| `endpoint` | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
-| `data`     | `array`  | Only for POST and PUT, data that will be converted to JSON                   |
+### REST Function
 
-### Request
+This function is used internally as a warpper for the library.
+An Async function that requests Data from server. 
+
+| Params    | Type     | Description                                                                  |
+| --------- | -------- | ---------------------------------------------------------------------------- |
+| `Method`  | `string` | HTTP Methods for RESTful Services (Get, Put, Post, Patch, Delete)            |
+| `Path`    | `string` | WooCommerce API endpoint, example: `catalog/products` or `orders/{order_id}` |
+| `options` | `Object` | options { queryParams, auth, body, headers }                                 |
 
 ```javascript
-mp.$fetch(method, endpoint);
+mp.$fetch(method, path,options={});
 ```
+
+Example: 
+```javascript
+mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : count and categories array
+
+```
+
+## postman 
+
+If you want to test the API on the postman you can get the bearer token by using this following mettohds: 
+
+```javascript
+ mp.getTokenAuth() // Async function
+ mp.getToeknAuth().then(console.log)
+```
+After that you can use the available resource to test and see the results you got!.
+
 
 ## Reporting Security Issues
 
