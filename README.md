@@ -34,7 +34,7 @@ yarn add @kanwat/mp
 
 ## Getting started
 
-Check out the Knawat Dropshipping MP REST API endpoints and data that can be manipulated in <https://mp.knawat.io/>.
+Check out the Knawat Dropshipping MP REST API endpoints and data that can be manipulated in  [our documentations](https://mp.knawat.io).
 
 ## Setup
 
@@ -65,8 +65,7 @@ const mp = new MP({
 | `store`        | `string` | conditional | Your store current store URL                                                  |
 | `apiRateLimit` | `object` | optional    | Overwrite the API rate limit (not recommended)                                |
 
-<small>https://knawat-mp.restlet.io/#operation_get_token</small>
-
+[Getting Access tokens](https://docs.knawat.io/#tag/Authentication/paths/~1token/post)
 
 ## Library Methods
 
@@ -74,6 +73,7 @@ const mp = new MP({
 ### Products Functions
 
 All the functions mentioned here return a promise and it's an async function.
+
 What's mentioned between `[brackets]` are the authentication method used for the functions.
 
 Example 
@@ -146,7 +146,14 @@ mp.getProducts() // return a promise.
   - **updateTaxRecord(id, tax)**
   - **getTaxById(id)**
   - **deleteTaxRecord(id)**
+- (Dev)Zones `[Basic]` 
+  -  **listZones()**
+  -  **getZoneByID(id)**
+  -  **getZoneByDomain(domain)**
+  -  **updateZoneByID(id,[params])**
+  -  **createZone(zone)**
 
+Note: the methods with the Dev tag is still underdevelopment.
 
 ### REST Function
 
@@ -169,7 +176,7 @@ mp.$fetch('GET', '/catalog/categories', { auth: 'token' }); // returns object : 
 
 ```
 
-## postman 
+## postman and bearer token. 
 
 If you want to test the API on the postman you can get the bearer token by using this following mettohds: 
 
@@ -177,7 +184,8 @@ If you want to test the API on the postman you can get the bearer token by using
  mp.getTokenAuth() // Async function
  mp.getToeknAuth().then(console.log)
 ```
-After that you can use the available resource to test and see the results you got!.
+
+After that you can use the available methods to test and see the results you got!.
 
 
 ## Reporting Security Issues
