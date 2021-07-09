@@ -13,6 +13,7 @@ import stores from './api/stores';
 import subscriptions from './api/subscriptions';
 import taxes from './api/taxes';
 import logs from './api/logs';
+import zones from './api/zones';
 
 KnawatMP._addToPrototype(categories);
 KnawatMP._addToPrototype(coupons);
@@ -28,5 +29,7 @@ KnawatMP._addToPrototype(stores);
 KnawatMP._addToPrototype(subscriptions);
 KnawatMP._addToPrototype(taxes);
 KnawatMP._addToPrototype(logs);
+KnawatMP._addToPrototype(zones);
+
 
 module.exports = KnawatMP;
