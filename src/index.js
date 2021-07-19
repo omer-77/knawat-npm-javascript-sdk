@@ -31,5 +31,4 @@ KnawatMP._addToPrototype(taxes);
 KnawatMP._addToPrototype(logs);
 KnawatMP._addToPrototype(zones);
 
-
-module.exports = KnawatMP;
+export default KnawatMP;
